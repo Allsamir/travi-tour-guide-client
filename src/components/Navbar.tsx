@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import ButtonOutline from "./ButtonOutline";
+import Swal from "sweetalert2";
 
 const Navbar: React.FC = () => {
   const navLinks = (
@@ -24,6 +27,17 @@ const Navbar: React.FC = () => {
     </>
   );
   const [show, setShow] = useState(true);
+  const { user, logOutUser } = useAuth();
+  const logOutFunction = () => {
+    logOutUser().then(() =>
+      Swal.fire({
+        title: "Successful",
+        text: "Logout Successfully Done",
+        icon: "success",
+        confirmButtonText: "Close",
+      }),
+    );
+  };
   return (
     <>
       <div className="navbar bg-secondaryColor py-6">
@@ -37,8 +51,22 @@ const Navbar: React.FC = () => {
           </a>
         </div>
         <div className="flex-none hidden lg:inline-flex">
-          <ul className="menu menu-horizontal px-1 uppercase text-primaryColor font-semibold gap-3">
+          <ul className="menu menu-horizontal px-1 uppercase text-primaryColor font-semibold gap-3 items-center">
             {navLinks}
+            {user ? (
+              <>
+                <img
+                  src={user?.photoURL || ""}
+                  alt={user.displayName || ""}
+                  className="w-12 rounded-full"
+                />
+                <ButtonOutline text="Logout" afunction={logOutFunction} />
+              </>
+            ) : (
+              <Link to={`/login`}>
+                <ButtonOutline text="Login" />
+              </Link>
+            )}
           </ul>
         </div>
         <div className="drawer-content flex-none lg:hidden">
@@ -64,6 +92,20 @@ const Navbar: React.FC = () => {
           <ul className="menu p-4 w-80 min-h-full bg-secondaryColor uppercase text-primaryColor font-semibold gap-3">
             {/* Sidebar content here */}
             {navLinks}
+            {user ? (
+              <>
+                <img
+                  src={user?.photoURL || ""}
+                  alt={user.displayName || ""}
+                  className="w-12 rounded-full mx-auto"
+                />
+                <ButtonOutline text="Logout" afunction={logOutFunction} />
+              </>
+            ) : (
+              <Link to={`/login`}>
+                <ButtonOutline text="Login" />
+              </Link>
+            )}
           </ul>
         </div>
       </div>

@@ -5,7 +5,8 @@ import useAuth from "../hooks/useAuth";
 import { auth } from "../config/firebase.config";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ButtonOutline from "../components/ButtonOutline";
 type Inputs = {
   name: string;
   email: string;
@@ -20,7 +21,7 @@ const Register: React.FC = () => {
   } = useForm<Inputs>();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
-  const { createUser, setLoading, loading, googleProvider } = useAuth();
+  const { createUser, setLoading, googleProvider } = useAuth();
   const signInWithGoogle = () => {
     googleProvider()
       .then((result) => {
@@ -153,15 +154,7 @@ const Register: React.FC = () => {
                     case, one number and one special character
                   </span>
                 )}
-                <button
-                  type="submit"
-                  className="btn btn-outline text-primaryColor hover:text-secondaryColor hover:bg-primaryColor hover:border-none uppercase"
-                >
-                  Register
-                  {loading && (
-                    <span className="loading loading-spinner loading-xs text-primaryColor"></span>
-                  )}
-                </button>
+                <ButtonOutline text="Register" buttonType="submit" />
                 <button
                   className="btn btn-outline  text-primaryColor hover:text-secondaryColor hover:bg-primaryColor hover:border-none uppercase"
                   onClick={signInWithGoogle}
@@ -169,6 +162,15 @@ const Register: React.FC = () => {
                   <FcGoogle />
                 </button>
               </form>
+              <p className="text-center pb-8 text-primaryColor">
+                Already Registered?{" "}
+                <Link
+                  to={`/login`}
+                  className="underline-offset-auto hover:text-titleColor"
+                >
+                  Login
+                </Link>
+              </p>
             </div>
           </div>
         </div>

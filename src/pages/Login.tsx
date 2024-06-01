@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import ButtonOutline from "../components/ButtonOutline";
 type Inputs = {
   email: string;
   password: string;
@@ -16,7 +17,7 @@ const Login: React.FC = () => {
   } = useForm<Inputs>();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
-  const { loading, googleProvider, loginUser, setLoading } = useAuth();
+  const { googleProvider, loginUser, setLoading } = useAuth();
   const signInWithGoogle = () => {
     googleProvider()
       .then((result) => {
@@ -98,7 +99,7 @@ const Login: React.FC = () => {
                   />
                   <span
                     onClick={() => setPasswordVisible(!isPasswordVisible)}
-                    className="absolute right-4 bottom-5"
+                    className="absolute right-4 bottom-5 hover:cursor-pointer"
                   >
                     {isPasswordVisible ? "Hide" : "Show"}
                   </span>
@@ -109,15 +110,7 @@ const Login: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-outline text-primaryColor hover:text-secondaryColor hover:bg-primaryColor hover:border-none uppercase"
-                >
-                  Login
-                  {loading && (
-                    <span className="loading loading-spinner loading-xs text-primaryColor"></span>
-                  )}
-                </button>
+                <ButtonOutline text="Login" buttonType="submit"></ButtonOutline>
                 <button
                   className="btn btn-outline  text-primaryColor hover:text-secondaryColor hover:bg-primaryColor hover:border-none uppercase"
                   onClick={signInWithGoogle}
@@ -125,6 +118,15 @@ const Login: React.FC = () => {
                   <FcGoogle />
                 </button>
               </form>
+              <p className="text-center pb-8 text-primaryColor">
+                New Here?{" "}
+                <Link
+                  to={`/register`}
+                  className="underline-offset-auto hover:text-titleColor"
+                >
+                  Create a New Account
+                </Link>
+              </p>
             </div>
           </div>
         </div>
