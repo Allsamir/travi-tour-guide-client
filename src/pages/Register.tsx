@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import { updateProfile } from "firebase/auth";
 import useAuth from "../hooks/useAuth";
 import { auth } from "../config/firebase.config";
@@ -77,6 +76,9 @@ const Register: React.FC = () => {
           </div>
           <div className="flex-1">
             <div className="card shrink-0 w-full ">
+              <h3 className="text-2xl md:text-4xl text-primaryColor font-semibold text-center uppercase">
+                Register Now!
+              </h3>
               <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control">
                   <label className="label">
