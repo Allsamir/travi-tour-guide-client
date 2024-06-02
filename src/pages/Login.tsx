@@ -59,7 +59,7 @@ const Login: React.FC = () => {
               className="mx-auto"
             />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 mt-12">
             <div className="card shrink-0 w-full ">
               <h3 className="text-2xl md:text-4xl text-primaryColor font-semibold text-center uppercase">
                 Login Now!

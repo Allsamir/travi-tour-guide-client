@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonOutline from "../components/ButtonOutline";
+import usePublicAxios from "../hooks/usePublicAxios";
 type Inputs = {
   name: string;
   email: string;
@@ -22,6 +23,7 @@ const Register: React.FC = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const { createUser, setLoading, googleProvider } = useAuth();
+  const publicAxios = usePublicAxios();
   const signInWithGoogle = () => {
     googleProvider()
       .then((result) => {
@@ -40,13 +42,24 @@ const Register: React.FC = () => {
             photoURL: photoURL,
           })
             .then(() => {
-              console.log("user created");
-              Swal.fire({
-                title: "Successful Registation",
-                text: " Successfully Done",
-                icon: "success",
-                confirmButtonText: "Close",
-              }).then(() => navigate("/"), event?.target.reset());
+              publicAxios
+                .post(`/users`, {
+                  email: email,
+                  name: name,
+                  role: "user",
+                  profilePicture: photoURL,
+                })
+                .then((res) => {
+                  if (res.data.success) {
+                    Swal.fire({
+                      title: "Successful Registation",
+                      text: " Successfully Done",
+                      icon: "success",
+                      confirmButtonText: "Close",
+                    }).then(() => navigate("/"), event?.target.reset());
+                  }
+                })
+                .catch((err) => console.error(err));
             })
             .catch((error) => {
               console.error(error);
@@ -75,7 +88,7 @@ const Register: React.FC = () => {
               className="mx-auto"
             />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 mt-12">
             <div className="card shrink-0 w-full ">
               <h3 className="text-2xl md:text-4xl text-primaryColor font-semibold text-center uppercase">
                 Register Now!

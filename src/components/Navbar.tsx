@@ -55,11 +55,30 @@ const Navbar: React.FC = () => {
             {navLinks}
             {user ? (
               <>
-                <img
-                  src={user?.photoURL || ""}
-                  alt={user.displayName || ""}
-                  className="w-12 rounded-full"
-                />
+                <div className="dropdown dropdown-left">
+                  <img
+                    tabIndex={0}
+                    role="button"
+                    src={user?.photoURL || ""}
+                    alt={user.displayName || ""}
+                    className="w-12 rounded-full"
+                  />
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[40] menu p-2 shadow bg-secondaryColor bg-opacity-75 text-primaryColor rounded-box min-w-60"
+                  >
+                    <div className="text-center space-y-2 mb-4">
+                      <p>{user.displayName}</p>
+                      <p className="lowercase">{user.email}</p>
+                    </div>
+                    <li>
+                      <Link to={``}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to={``}>Offer Announcements</Link>
+                    </li>
+                  </ul>
+                </div>
                 <ButtonOutline text="Logout" afunction={logOutFunction} />
               </>
             ) : (
@@ -94,11 +113,30 @@ const Navbar: React.FC = () => {
             {navLinks}
             {user ? (
               <>
-                <img
-                  src={user?.photoURL || ""}
-                  alt={user.displayName || ""}
-                  className="w-12 rounded-full mx-auto"
-                />
+                <div className="dropdown dropdown-right w-16 my-4">
+                  <img
+                    tabIndex={0}
+                    role="button"
+                    src={user?.photoURL || ""}
+                    alt={user.displayName || ""}
+                    className="w-12 rounded-full"
+                  />
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-40 menu p-2 shadow bg-secondaryColor  bg-opacity-75 text-primaryColor rounded-box min-w-60"
+                  >
+                    <div className="text-center space-y-2 mb-4">
+                      <p>{user.displayName}</p>
+                      <p className="lowercase">{user.email}</p>
+                    </div>
+                    <li>
+                      <Link to={``}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to={``}>Offer Announcements</Link>
+                    </li>
+                  </ul>
+                </div>
                 <ButtonOutline text="Logout" afunction={logOutFunction} />
               </>
             ) : (
