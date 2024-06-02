@@ -21,7 +21,7 @@ const Slider: React.FC = () => {
       >
         <SwiperSlide>
           <div
-            className="w-full h-full"
+            className="w-full h-full  bg-cover bg-center"
             style={{
               backgroundImage:
                 "url('http://quickdevs.com/demo/travi/images/commons/hero-image.jpg')",
@@ -31,13 +31,10 @@ const Slider: React.FC = () => {
               className="content absolute top-1/2 left-1/2 text-center w-full"
               style={{ transform: "translate(-50%, -50%)" }}
             >
-              <h5
-                className="text-secondaryColor uppercase font-bold text-base font-serif mb-4"
-                style={{ letterSpacing: "10px" }}
-              >
+              <h5 className="text-secondaryColor uppercase font-bold text-base font-serif mb-4 tracking-widest md:tracking-[10px]">
                 Explore The World
               </h5>
-              <h2 className="leading-[70px] text-6xl uppercase text-primaryColor font-bold font-serif">
+              <h2 className="leading-[70px] lg:text-6xl text-3xl uppercase text-primaryColor font-bold font-serif">
                 A More rewarding <br /> way to travel
               </h2>
             </div>
@@ -55,13 +52,10 @@ const Slider: React.FC = () => {
               className="content absolute top-1/2 left-1/2 text-center w-full"
               style={{ transform: "translate(-50%, -50%)" }}
             >
-              <h5
-                className="text-secondaryColor uppercase font-bold text-base font-serif mb-4"
-                style={{ letterSpacing: "10px" }}
-              >
+              <h5 className="text-secondaryColor uppercase font-bold text-base font-serif mb-4 tracking-widest md:tracking-[10px]">
                 Be an adventure
               </h5>
-              <h2 className="leading-[70px] text-6xl uppercase text-primaryColor font-bold font-serif">
+              <h2 className="leading-[70px] lg:text-6xl text-3xl uppercase text-primaryColor font-bold font-serif">
                 Collectiong Memories <br /> Everytime
               </h2>
             </div>
@@ -79,13 +73,10 @@ const Slider: React.FC = () => {
               className="content absolute top-1/2 left-1/2 text-center w-full"
               style={{ transform: "translate(-50%, -50%)" }}
             >
-              <h5
-                className="text-secondaryColor uppercase font-bold text-base font-serif mb-4"
-                style={{ letterSpacing: "10px" }}
-              >
+              <h5 className="text-secondaryColor uppercase font-bold text-base font-serif mb-4 tracking-widest md:tracking-[10px]">
                 find our passion
               </h5>
-              <h2 className="leading-[70px] text-6xl uppercase text-primaryColor font-bold font-serif">
+              <h2 className="leading-[70px] lg:text-6xl text-3xl uppercase text-primaryColor font-bold font-serif">
                 Escape life for <br /> A little white
               </h2>
             </div>
@@ -104,12 +95,12 @@ const Slider: React.FC = () => {
               style={{ transform: "translate(-50%, -50%)" }}
             >
               <h5
-                className="text-secondaryColor uppercase font-bold text-base font-serif mb-4"
+                className="text-secondaryColor uppercase font-bold text-base font-serif mb-4 tracking-widest md:tracking-[10px]"
                 style={{ letterSpacing: "10px" }}
               >
                 Commit To Travel
               </h5>
-              <h2 className="leading-[70px] text-6xl uppercase text-primaryColor font-bold font-serif">
+              <h2 className="leading-[70px] lg:text-6xl text-3xl uppercase text-primaryColor font-bold font-serif">
                 The real adventure <br /> is out there
               </h2>
             </div>
