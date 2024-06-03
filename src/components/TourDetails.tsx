@@ -131,47 +131,40 @@ const TourDetails: React.FC = () => {
           </p>
         )}
       </div>
-      <h2 className="text-center my-12 text-2xl font-serif md:text-4xl font-bold">
+      <h2 className="text-center my-20 text-2xl font-serif md:text-4xl font-bold">
         Meet Our Guides
       </h2>
-      <div className="guides text-center">
-        <div className="carousel carousel-center rounded-box">
-          {guides.map((guide: User, index: number) => (
-            <div
-              className="carousel-item bg-base-100 shadow-xl mb-12"
-              key={index}
-            >
-              <div className="text-center bg-primaryColor px-8 space-y-4 my-12">
-                <div className="">
-                  <img
-                    src={guide.profilePicture}
-                    alt={guide.name}
-                    className="w-24 rounded-full mx-auto"
-                  />
-                </div>
-                <div>
-                  <h1 className="text-xl font-serif font-bold">{guide.name}</h1>
-                  <p className="text-base font-serif font-semibold">
-                    {guide.role}
-                  </p>
-                </div>
-                <div>
-                  {guide.comments?.slice(0, 1).map((comment, index) => (
-                    <p className="text-[13px]" key={index}>
-                      {comment.comment}
-                    </p>
-                  ))}
-                </div>
-                <div>
-                  <Rate disabled defaultValue={guide.rating} />
-                </div>
-              </div>
+      <div className="carousel carousel-center rounded-box">
+        {guides.map((guide: User, index: number) => (
+          <div
+            className="bg-base-100 shadow-xl text-center space-y-4 py-12 carousel-item gap-8 mx-12 px-12 items-center"
+            key={index}
+          >
+            <div>
+              <img
+                src={guide.profilePicture}
+                alt={guide.name}
+                className="w-24 rounded-full mx-auto"
+              />
             </div>
-          ))}
-        </div>
+            <div>
+              <h1 className="text-xl font-serif font-bold">{guide.name}</h1>
+              <p className="text-base font-serif font-semibold">{guide.role}</p>
+            </div>
+            <div>
+              {guide.comments?.slice(0, 1).map((comment, index) => (
+                <p className="text-[13px]" key={index}>
+                  {comment.comment}
+                </p>
+              ))}
+            </div>
+            <div>
+              <Rate disabled defaultValue={guide.rating} />
+            </div>
+          </div>
+        ))}
       </div>
-
-      <h2 className="text-center my-12 text-2xl font-serif md:text-4xl font-bold">
+      <h2 className="text-center my-20 text-2xl font-serif md:text-4xl font-bold">
         Book Your Trip Now
       </h2>
       <div className="card shrink-0 w-full lg:w-1/2 md:w-4/5 mx-auto shadow-2xl bg-base-100 my-12">
