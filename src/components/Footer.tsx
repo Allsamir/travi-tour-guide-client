@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           />
         </a>
       </div>
-      <nav className="grid grid-flow-col gap-4">
+      <nav className="flex flex-wrap gap-4 justify-center">
         <Link to={`/`}>Home</Link>
         <Link to={`/community`}>Community</Link>
         <Link to={`/blogs`}>Blogs</Link>

@@ -111,32 +111,23 @@ const Navbar: React.FC = () => {
           <ul className="menu p-4 w-80 min-h-full bg-secondaryColor uppercase text-primaryColor font-semibold gap-3">
             {/* Sidebar content here */}
             {navLinks}
+            <div className="divider divider-info"></div>
             {user ? (
               <>
-                <div className="dropdown dropdown-right w-16 my-4">
-                  <img
-                    tabIndex={0}
-                    role="button"
-                    src={user?.photoURL || ""}
-                    alt={user.displayName || ""}
-                    className="w-12 rounded-full"
-                  />
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content z-40 menu p-2 shadow bg-secondaryColor  bg-opacity-75 text-primaryColor rounded-box min-w-60"
-                  >
-                    <div className="text-center space-y-2 mb-4">
-                      <p>{user.displayName}</p>
-                      <p className="lowercase">{user.email}</p>
-                    </div>
-                    <li>
-                      <Link to={``}>Dashboard</Link>
-                    </li>
-                    <li>
-                      <Link to={``}>Offer Announcements</Link>
-                    </li>
-                  </ul>
-                </div>
+                <img
+                  role="button"
+                  src={user?.photoURL || ""}
+                  alt={user.displayName || ""}
+                  className="w-12 ml-3 rounded-full"
+                />
+                <ul className="">
+                  <li>
+                    <Link to={``}>Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to={``}>Offer Announcements</Link>
+                  </li>
+                </ul>
                 <ButtonOutline text="Logout" afunction={logOutFunction} />
               </>
             ) : (

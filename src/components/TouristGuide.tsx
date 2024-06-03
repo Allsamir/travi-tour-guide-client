@@ -66,14 +66,7 @@ const TouristGuide: React.FC = () => {
           <TabPanel>
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8">
               {tourdata.map((tour, index) => (
-                <TourCard
-                  key={index}
-                  title={tour.title}
-                  price={tour.price}
-                  tourType={tour.tourType}
-                  images={tour.images}
-                  description={tour.description}
-                />
+                <TourCard key={index} tourData={tour} />
               ))}
             </div>
           </TabPanel>

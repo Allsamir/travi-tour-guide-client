@@ -27,8 +27,23 @@ const Register: React.FC = () => {
   const signInWithGoogle = () => {
     googleProvider()
       .then((result) => {
-        console.log(result.user);
-        navigate("/");
+        publicAxios
+          .post(`/users`, {
+            email: result.user.email,
+            name: result.user.displayName,
+            role: "user",
+            profilePicture: result.user.photoURL,
+          })
+          .then((res) => {
+            if (res.data.success) {
+              Swal.fire({
+                title: "Successful Registation",
+                text: " Successfully Done",
+                icon: "success",
+                confirmButtonText: "Close",
+              }).then(() => navigate("/"));
+            }
+          });
       })
       .catch((err) => console.error(err));
   };
