@@ -6,7 +6,7 @@
   background-color: white !important;
   color: #2485b0 !important;
 }
-.ant-modal-content {
+.videoModal .ant-modal-content {
   background-color: unset !important;
   box-shadow: unset !important;
 }

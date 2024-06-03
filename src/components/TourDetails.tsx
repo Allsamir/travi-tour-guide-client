@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Package from "../interfaces/Package";
 import usePublicAxios from "../hooks/usePublicAxios";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import User from "../interfaces/User";
 import useUser from "../hooks/useUser";
 import { Rate } from "antd";
@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
 import useSecureAxios from "../hooks/useSecureAxios";
 import Swal from "sweetalert2";
+import { Modal } from "antd";
 interface IFormInput {
   name: string;
   email: string;
@@ -22,18 +23,23 @@ const TourDetails: React.FC = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm<IFormInput>();
   const publicAxios = usePublicAxios();
+  const [formData, setFormData] = useState<IFormInput>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const secureAxios = useSecureAxios();
   const guides: User[] = useUser("guide");
   const { user } = useAuth();
-  const onSubmit: SubmitHandler<IFormInput> = (data, event) => {
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleOk = () => {
     secureAxios
       .post(`/bookings`, {
         email: user?.email,
         name: user?.displayName,
         photoURL: user?.photoURL,
         price: tourData?.price,
-        date: data.date,
-        guide: data.guide,
+        date: formData?.date,
+        guide: formData?.guide,
         status: "In Review",
         packageID: tourData?._id,
       })
@@ -45,10 +51,18 @@ const TourDetails: React.FC = () => {
             icon: "success",
             confirmButtonText: "Close",
           });
-          event?.target.reset();
         }
       })
       .catch((err) => console.error(err));
+  };
+  const navigate = useNavigate();
+  const handleClick = () => {
+    user || navigate("/login");
+  };
+  const onSubmit: SubmitHandler<IFormInput> = (data, event) => {
+    setFormData(data);
+    setIsModalOpen(true);
+    event?.target.reset();
   };
   useEffect(() => {
     publicAxios
@@ -160,7 +174,7 @@ const TourDetails: React.FC = () => {
       <h2 className="text-center my-12 text-2xl font-serif md:text-4xl font-bold">
         Book Your Trip Now
       </h2>
-      <div className="card shrink-0 w-full lg:w-1/2 md:w-4/5 mx-auto shadow-2xl bg-base-100">
+      <div className="card shrink-0 w-full lg:w-1/2 md:w-4/5 mx-auto shadow-2xl bg-base-100 my-12">
         <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex gap-4">
             <div className="form-control flex-1">
@@ -255,12 +269,26 @@ const TourDetails: React.FC = () => {
             <button
               type="submit"
               className="btn btn-outline text-secondaryColor hover:border-none uppercase"
+              onClick={handleClick}
             >
               Book Now
             </button>
           </div>
         </form>
       </div>
+      <Modal
+        title={`${tourData?.title}`}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText={`Confirm Your Booking`}
+      >
+        <div className="text-center my-16">
+          <Link to={`/home`} className="text-xl font-bold">
+            My Bookings
+          </Link>
+        </div>
+      </Modal>
     </>
   );
 };

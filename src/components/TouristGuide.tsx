@@ -52,6 +52,7 @@ const TouristGuide: React.FC = () => {
               onCancel={handleCancel}
               centered={true}
               footer={null}
+              className="videoModal"
             >
               <iframe
                 className="w-full h-[400px]"
