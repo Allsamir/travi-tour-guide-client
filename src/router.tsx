@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import TourDetails from "./components/TourDetails";
 import AllPackages from "./pages/AllPackages";
+import GuideProfile from "./pages/GuideProfile";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/all-packages",
         element: <AllPackages />,
+      },
+      {
+        path: "/guide-profile/:id",
+        element: <GuideProfile />,
       },
     ],
   },

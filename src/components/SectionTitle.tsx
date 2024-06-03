@@ -1,7 +1,7 @@
 import React from "react";
 interface ChildProps {
   heading: string;
-  subheading: string;
+  subheading?: string;
 }
 const SectionTitle: React.FC<ChildProps> = ({ heading, subheading }) => {
   return (

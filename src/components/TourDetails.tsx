@@ -12,6 +12,8 @@ import Swal from "sweetalert2";
 import { Modal } from "antd";
 import { Helmet } from "react-helmet-async";
 import ButtonOutline2 from "./ButtonOutline2";
+import PageCover from "./PageCover";
+import SectionTitle from "./SectionTitle";
 interface IFormInput {
   name: string;
   email: string;
@@ -86,21 +88,11 @@ const TourDetails: React.FC = () => {
       <Helmet>
         <title>Travi - Tour Guide | {tourData?.title || ""}</title>
       </Helmet>
-      <div
-        className="w-full md:h-[70vh] h-[60vh] bg-cover bg-top relative"
-        style={{ backgroundImage: `url('${tourData?.images[0]}')` }}
-      >
-        <div className="w-full h-full bg-titleColor bg-opacity-45">
-          <div className="content absolute bottom-8 left-4">
-            <h2 className="text-primaryColor font-serif font-bold md:text-4xl text-2xl">
-              {tourData?.title} in
-            </h2>
-            <p className="text-primaryColor font-serif font-bold md:text-4xl text-2xl">
-              {tourData?.location}
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageCover
+        imageURL={tourData?.images[0] || ""}
+        text={tourData?.title || ""}
+        secondText={tourData?.location}
+      />
       <div className="grid lg:grid-rows-2 lg:grid-flow-col lg:w-4/5 w-full px-4 mx-auto gap-2 mt-20">
         <div className="lg:row-span-2">
           <img
@@ -145,9 +137,11 @@ const TourDetails: React.FC = () => {
           </p>
         )}
       </div>
-      <h2 className="text-center my-20 text-2xl font-serif md:text-4xl font-bold">
-        Meet Our Guides
-      </h2>
+      <SectionTitle
+        heading="Meet Our Guides"
+        subheading="We have a team of professionals, dedicated to providing excellent service to ensure the enjoyment of your vacation."
+      />
+      <p></p>
       <div className="carousel carousel-center rounded-box">
         {guides.map((guide: User, index: number) => (
           <div
@@ -163,7 +157,9 @@ const TourDetails: React.FC = () => {
             </div>
             <div>
               <h1 className="text-xl font-serif font-bold">{guide.name}</h1>
-              <p className="text-base font-serif font-semibold">{guide.role}</p>
+              <p className="text-base font-serif font-semibold">
+                {guide.role.toUpperCase()}
+              </p>
             </div>
             <div>
               {guide.comments?.slice(0, 1).map((comment, index) => (
@@ -178,9 +174,7 @@ const TourDetails: React.FC = () => {
           </div>
         ))}
       </div>
-      <h2 className="text-center my-20 text-2xl font-serif md:text-4xl font-bold">
-        Book Your Trip Now
-      </h2>
+      <SectionTitle heading="Book Your Trip Today!" />
       <div className="card shrink-0 w-full lg:w-1/2 md:w-4/5 mx-auto shadow-2xl bg-base-100 my-12">
         <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex gap-4">

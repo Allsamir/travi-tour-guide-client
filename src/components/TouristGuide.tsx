@@ -94,36 +94,38 @@ const TouristGuide: React.FC = () => {
           <TabPanel>
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12">
               {guides.map((guide: User, index: number) => (
-                <div
-                  className="bg-base-100 shadow-xl text-center space-y-4 py-12"
-                  key={index}
-                >
-                  <div>
-                    <img
-                      src={guide.profilePicture}
-                      alt={guide.name}
-                      className="w-24 rounded-full mx-auto"
-                    />
-                  </div>
-                  <div>
-                    <h1 className="text-xl font-serif font-bold">
-                      {guide.name}
-                    </h1>
-                    <p className="text-base font-serif font-semibold">
-                      {guide.role}
-                    </p>
-                  </div>
-                  <div>
-                    {guide.comments?.slice(0, 1).map((comment, index) => (
-                      <p className="text-[13px]" key={index}>
-                        {comment.comment}
+                <Link to={`/guide-profile/${guide._id}`} key={index}>
+                  <div
+                    className="bg-base-100 shadow-xl text-center space-y-4 py-12 hover:scale-110 transition"
+                    key={index}
+                  >
+                    <div>
+                      <img
+                        src={guide.profilePicture}
+                        alt={guide.name}
+                        className="w-24 rounded-full mx-auto"
+                      />
+                    </div>
+                    <div>
+                      <h1 className="text-xl font-serif font-bold">
+                        {guide.name}
+                      </h1>
+                      <p className="text-base font-serif font-semibold">
+                        {guide.role}
                       </p>
-                    ))}
+                    </div>
+                    <div>
+                      {guide.comments?.slice(0, 1).map((comment, index) => (
+                        <p className="text-[13px]" key={index}>
+                          {comment.comment}
+                        </p>
+                      ))}
+                    </div>
+                    <div>
+                      <Rate disabled defaultValue={guide.rating} />
+                    </div>
                   </div>
-                  <div>
-                    <Rate disabled defaultValue={guide.rating} />
-                  </div>
-                </div>
+                </Link>
               ))}
             </div>
           </TabPanel>

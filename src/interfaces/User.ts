@@ -1,4 +1,5 @@
 interface User {
+  _id: string;
   email: string;
   name: string;
   profilePicture: string;
@@ -9,7 +10,7 @@ interface User {
   skills?: string[];
   work_experience?: string;
   rating?: number;
-  comments?: { name: string; comment: string }[];
+  comments?: { name: string; comment: string; rating: number }[];
 }
 
 export default User;

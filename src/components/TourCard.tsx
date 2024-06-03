@@ -9,7 +9,7 @@ const TourCard: React.FC<ChildProps> = ({ tourData }) => {
     <>
       <Link to={`/tour-details/${tourData._id}`}>
         <div
-          className="relative bg-center bg-cover h-[80vh]"
+          className="relative bg-center bg-cover h-[80vh] hover:scale-110 transition"
           style={{ backgroundImage: `url('${tourData.images[0]}')` }}
         >
           <div className="price absolute top-6 left-6 bg-[#FFFCF7] py-2 px-4 rounded-3xl">
