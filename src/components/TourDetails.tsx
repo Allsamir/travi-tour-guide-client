@@ -264,7 +264,7 @@ const TourDetails: React.FC = () => {
               className="btn btn-outline text-secondaryColor hover:border-none uppercase"
               onClick={handleClick}
             >
-              Book Now
+              {user ? "Book Now" : "Please Login"}
             </button>
           </div>
         </form>

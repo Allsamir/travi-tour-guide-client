@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
@@ -18,11 +18,12 @@ const Login: React.FC = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const { googleProvider, loginUser, setLoading } = useAuth();
+  const location = useLocation();
   const signInWithGoogle = () => {
     googleProvider()
       .then((result) => {
         console.log(result.user);
-        navigate("/");
+        navigate(location.state || "/");
       })
       .catch((err) => console.error(err));
   };
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
           text: "Login Successfully Done",
           icon: "success",
           confirmButtonText: "Close",
-        }).then(() => navigate("/"), event?.target.reset());
+        }).then(() => navigate(location.state || "/"), event?.target.reset());
       })
       .catch((error) => {
         const errorCode = error.code;
