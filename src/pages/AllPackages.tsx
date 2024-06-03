@@ -1,14 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
-const Blogs: React.FC = () => {
+const AllPackages: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Travi - Tour Guide | Blogs</title>
+        <title>Travi - Tour Guide | All Packages</title>
       </Helmet>
     </>
   );
 };
 
-export default Blogs;
+export default AllPackages;

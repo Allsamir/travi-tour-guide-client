@@ -8,10 +8,13 @@ import Package from "../interfaces/Package";
 import TourCard from "./TourCard";
 import useUser from "../hooks/useUser";
 import User from "../interfaces/User";
+import { Link } from "react-router-dom";
+import ButtonOutline2 from "./ButtonOutline2";
 const TouristGuide: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tourdata, setTourdata] = useState<Package[]>([]);
+  const [tourDataLoading, settourDataLoading] = useState(true);
   const publicAxios = usePublicAxios();
   const guides: User[] = useUser("guide");
   const showModal = () => {
@@ -24,7 +27,10 @@ const TouristGuide: React.FC = () => {
     if (tabIndex === 1) {
       publicAxios
         .get(`/packages/limited`)
-        .then((res) => setTourdata(res.data))
+        .then((res) => {
+          setTourdata(res.data);
+          settourDataLoading(false);
+        })
         .catch((err) => console.error(err));
     }
   }, [tabIndex, publicAxios]);
@@ -68,10 +74,21 @@ const TouristGuide: React.FC = () => {
             </Modal>
           </TabPanel>
           <TabPanel>
-            <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8">
-              {tourdata.map((tour, index) => (
-                <TourCard key={index} tourData={tour} />
-              ))}
+            {tourDataLoading ? (
+              <div className="flex justify-center items-center h-[80vh]">
+                <span className="loading loading-bars loading-lg"></span>
+              </div>
+            ) : (
+              <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8">
+                {tourdata.map((tour, index) => (
+                  <TourCard key={index} tourData={tour} />
+                ))}
+              </div>
+            )}
+            <div className="text-center mt-12">
+              <Link to={`/all-packages`}>
+                <ButtonOutline2 text="All Packages" />
+              </Link>
             </div>
           </TabPanel>
           <TabPanel>

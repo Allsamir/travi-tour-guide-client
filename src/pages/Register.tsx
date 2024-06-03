@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonOutline from "../components/ButtonOutline";
 import usePublicAxios from "../hooks/usePublicAxios";
+import { Helmet } from "react-helmet-async";
 type Inputs = {
   name: string;
   email: string;
@@ -94,6 +95,9 @@ const Register: React.FC = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Travi - Tour Guide | Register</title>
+      </Helmet>
       <div className="bg-secondaryColor">
         <div className="lg:flex justify-center items-center container mx-auto px-4 min-h-screen">
           <div className="lg:w-5/12">

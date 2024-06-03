@@ -8,6 +8,7 @@ import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import TourDetails from "./components/TourDetails";
+import AllPackages from "./pages/AllPackages";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/tour-details/:id",
         element: <TourDetails />,
+      },
+      {
+        path: "/all-packages",
+        element: <AllPackages />,
       },
     ],
   },

@@ -5,6 +5,7 @@ import useAuth from "../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import ButtonOutline from "../components/ButtonOutline";
+import { Helmet } from "react-helmet-async";
 type Inputs = {
   email: string;
   password: string;
@@ -51,6 +52,9 @@ const Login: React.FC = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Travi - Tour Guide | Login</title>
+      </Helmet>
       <div className="bg-secondaryColor">
         <div className="lg:flex justify-center items-center container mx-auto px-4 min-h-screen">
           <div className="lg:w-5/12">
