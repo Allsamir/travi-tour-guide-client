@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Package from "../interfaces/Package";
 import usePublicAxios from "../hooks/usePublicAxios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import User from "../interfaces/User";
 import useUser from "../hooks/useUser";
 import { Rate } from "antd";
@@ -10,6 +10,7 @@ import useAuth from "../hooks/useAuth";
 import useSecureAxios from "../hooks/useSecureAxios";
 import Swal from "sweetalert2";
 import { Modal } from "antd";
+import { Helmet } from "react-helmet-async";
 interface IFormInput {
   name: string;
   email: string;
@@ -26,12 +27,16 @@ const TourDetails: React.FC = () => {
   const [formData, setFormData] = useState<IFormInput>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const secureAxios = useSecureAxios();
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const guides: User[] = useUser("guide");
+  const location = useLocation();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const handleCancel = () => {
     setIsModalOpen(false);
   };
   const handleOk = () => {
+    setConfirmLoading(true);
     secureAxios
       .post(`/bookings`, {
         email: user?.email,
@@ -50,14 +55,19 @@ const TourDetails: React.FC = () => {
             text: `${res.data.message}`,
             icon: "success",
             confirmButtonText: "Close",
+          }).then(() => {
+            setIsModalOpen(false);
+            setConfirmLoading(false);
           });
         }
       })
       .catch((err) => console.error(err));
   };
-  const navigate = useNavigate();
   const handleClick = () => {
-    user || navigate("/login");
+    user ||
+      navigate("/login", {
+        state: location.pathname,
+      });
   };
   const onSubmit: SubmitHandler<IFormInput> = (data, event) => {
     setFormData(data);
@@ -72,6 +82,9 @@ const TourDetails: React.FC = () => {
   }, [publicAxios, id]);
   return (
     <>
+      <Helmet>
+        <title>Travi - Tour Guide | {tourData?.title || ""}</title>
+      </Helmet>
       <div
         className="w-full md:h-[70vh] h-[60vh] bg-cover bg-top relative"
         style={{ backgroundImage: `url('${tourData?.images[0]}')` }}
@@ -275,6 +288,7 @@ const TourDetails: React.FC = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         okText={`Confirm Your Booking`}
+        confirmLoading={confirmLoading}
       >
         <div className="text-center my-16">
           <Link to={`/home`} className="text-xl font-bold">
