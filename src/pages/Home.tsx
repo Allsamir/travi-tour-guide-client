@@ -2,10 +2,14 @@ import React from "react";
 import Slider from "../components/Slider/Slider";
 import SectionTitle from "../components/SectionTitle";
 import TouristGuide from "../components/TouristGuide";
+import { Helmet } from "react-helmet-async";
 
 const Home: React.FC = () => {
   return (
     <>
+      <Helmet>
+        <title>Travi - Tour Guide | Home</title>
+      </Helmet>
       <Slider />
       <SectionTitle
         heading="Travel Guide"

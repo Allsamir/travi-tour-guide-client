@@ -11,6 +11,7 @@ import useSecureAxios from "../hooks/useSecureAxios";
 import Swal from "sweetalert2";
 import { Modal } from "antd";
 import { Helmet } from "react-helmet-async";
+import ButtonOutline2 from "./ButtonOutline2";
 interface IFormInput {
   name: string;
   email: string;
@@ -272,13 +273,11 @@ const TourDetails: React.FC = () => {
             </select>
           </div>
           <div className="form-control mt-6">
-            <button
-              type="submit"
-              className="btn btn-outline text-secondaryColor hover:border-none uppercase"
-              onClick={handleClick}
-            >
-              {user ? "Book Now" : "Please Login"}
-            </button>
+            <ButtonOutline2
+              text={user ? "Book Now" : "Please Login first"}
+              afunction={handleClick}
+              buttonType="submit"
+            />
           </div>
         </form>
       </div>
@@ -292,7 +291,7 @@ const TourDetails: React.FC = () => {
       >
         <div className="text-center my-16">
           <Link to={`/home`} className="text-xl font-bold">
-            My Bookings
+            My Bookings Page
           </Link>
         </div>
       </Modal>
