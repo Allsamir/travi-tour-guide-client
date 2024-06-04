@@ -3,6 +3,7 @@ import Slider from "../components/Slider/Slider";
 import SectionTitle from "../components/SectionTitle";
 import TouristGuide from "../components/TouristGuide";
 import { Helmet } from "react-helmet-async";
+import TourType from "../components/TourType";
 
 const Home: React.FC = () => {
   return (
@@ -16,6 +17,11 @@ const Home: React.FC = () => {
         subheading="Search our website for the best destinations in the world, where you can enjoy the best vacations."
       />
       <TouristGuide />
+      <SectionTitle
+        heading="Find Perfect Trip"
+        subheading="Choose you desired tour type, we promise you the best service and best vacation experience"
+      />
+      <TourType />
     </>
   );
 };

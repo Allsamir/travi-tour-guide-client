@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import TourDetails from "./components/TourDetails";
 import AllPackages from "./pages/AllPackages";
 import GuideProfile from "./pages/GuideProfile";
+import PackagesBOType from "./components/PackagesBOType";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/guide-profile/:id",
         element: <GuideProfile />,
+      },
+      {
+        path: "/tour-type/:type",
+        element: <PackagesBOType />,
       },
     ],
   },
