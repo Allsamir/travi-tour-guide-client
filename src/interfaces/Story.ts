@@ -5,6 +5,7 @@ interface Story {
   spot: string;
   image: string;
   tourType?: string;
+  rating: number;
   story: string;
 }
 

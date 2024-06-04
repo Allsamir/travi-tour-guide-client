@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Story from "../interfaces/Story";
+import { Rate } from "antd";
 interface ChilProps {
   story: Story;
 }
@@ -16,13 +17,14 @@ const StoryCard: React.FC<ChilProps> = ({ story }) => {
               className="w-full h-full object-cover align-top"
             />
             <figcaption
-              className="absolute h-[90px] hover:h-[50%] right-4 left-4 bottom-4 top-20 text-primaryColor overflow-hidden p-4 space-y-5"
+              className="absolute h-[90px] hover:h-[55%] right-4 left-4 bottom-4 top-20 text-primaryColor overflow-hidden p-4 space-y-5"
               style={{
                 backgroundColor: "rgb(36, 133, 176, 0.8)",
                 transition: ".5s",
               }}
             >
               <h4 className="font-serif font-bold">{story.name}</h4>
+              <Rate defaultValue={story.rating} disabled />
               <p className="font-semibold">{story.spot}</p>
               <p>{story.story}</p>
               <p className="font-serif font-bold">{story.tourType}</p>
