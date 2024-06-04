@@ -31,7 +31,7 @@ const PackagesBOType: React.FC = () => {
       ></PageCover>
       <div className="container mx-auto px-4 my-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12">
-          {tourData.map((tourPackage: Package, index: number) => (
+          {tourData?.map((tourPackage: Package, index: number) => (
             <TourCard tourData={tourPackage} key={index} />
           ))}
         </div>

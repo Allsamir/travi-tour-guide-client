@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
   };
   return (
     <>
-      <div className="navbar bg-secondaryColor py-6">
+      <div className="navbar bg-secondaryColor py-6 lg:fixed lg:z-40 lg:bg-opacity-45">
         <div className="flex-1">
           <a className="text-xl">
             <img
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
                   />
                   <ul
                     tabIndex={0}
-                    className="dropdown-content z-[40] menu p-2 shadow bg-secondaryColor bg-opacity-75 text-primaryColor rounded-box min-w-60"
+                    className="dropdown-content z-[40] menu p-2 shadow bg-secondaryColor bg-opacity-45 text-primaryColor rounded-box min-w-60"
                   >
                     <div className="text-center space-y-2 mb-4">
                       <p>{user.displayName}</p>
@@ -99,6 +99,7 @@ const Navbar: React.FC = () => {
           </label>
         </div>
       </div>
+      {/* Dreawer */}
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side z-30">
@@ -108,7 +109,7 @@ const Navbar: React.FC = () => {
             className="drawer-overlay"
             onClick={() => setShow(true)}
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-secondaryColor uppercase text-primaryColor font-semibold gap-3">
+          <ul className="menu p-4 w-80 min-h-full bg-secondaryColor bg-opacity-45 uppercase text-primaryColor font-semibold gap-3">
             {/* Sidebar content here */}
             {navLinks}
             <div className="divider divider-info"></div>
