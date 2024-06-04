@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import ButtonOutline from "./ButtonOutline";
 import Swal from "sweetalert2";
+import { IoIosNotifications } from "react-icons/io";
 
 const Navbar: React.FC = () => {
   const navLinks = (
@@ -65,9 +66,9 @@ const Navbar: React.FC = () => {
                   />
                   <ul
                     tabIndex={0}
-                    className="dropdown-content z-[40] menu p-2 shadow bg-secondaryColor bg-opacity-45 text-primaryColor rounded-box min-w-60"
+                    className="dropdown-content z-[40] menu p-2 shadow bg-secondaryColor text-primaryColor rounded-box min-w-64"
                   >
-                    <div className="text-center space-y-2 mb-4">
+                    <div className="text-center space-y-3 my-4">
                       <p>{user.displayName}</p>
                       <p className="lowercase">{user.email}</p>
                     </div>
@@ -75,7 +76,10 @@ const Navbar: React.FC = () => {
                       <Link to={``}>Dashboard</Link>
                     </li>
                     <li>
-                      <Link to={``}>Offer Announcements</Link>
+                      <Link to={``}>
+                        Offer Announcements{" "}
+                        <IoIosNotifications className="text-2xl" />
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -126,7 +130,10 @@ const Navbar: React.FC = () => {
                     <Link to={``}>Dashboard</Link>
                   </li>
                   <li>
-                    <Link to={``}>Offer Announcements</Link>
+                    <Link to={``}>
+                      Offer Announcements{" "}
+                      <IoIosNotifications className="text-2xl" />
+                    </Link>
                   </li>
                 </ul>
                 <ButtonOutline text="Logout" afunction={logOutFunction} />

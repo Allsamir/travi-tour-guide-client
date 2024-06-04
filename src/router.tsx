@@ -11,6 +11,7 @@ import TourDetails from "./components/TourDetails";
 import AllPackages from "./pages/AllPackages";
 import GuideProfile from "./pages/GuideProfile";
 import PackagesBOType from "./components/PackagesBOType";
+import StoryDetails from "./components/StoryDetails";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/tour-type/:type",
         element: <PackagesBOType />,
+      },
+      {
+        path: "/story/:id",
+        element: <StoryDetails />,
       },
     ],
   },

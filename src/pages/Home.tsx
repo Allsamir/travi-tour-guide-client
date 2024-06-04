@@ -4,6 +4,7 @@ import SectionTitle from "../components/SectionTitle";
 import TouristGuide from "../components/TouristGuide";
 import { Helmet } from "react-helmet-async";
 import TourType from "../components/TourType";
+import Stories from "../components/Stories";
 
 const Home: React.FC = () => {
   return (
@@ -22,6 +23,11 @@ const Home: React.FC = () => {
         subheading="Choose you desired tour type, we promise you the best service and best vacation experience"
       />
       <TourType />
+      <SectionTitle
+        heading="What Our Tourist Says!"
+        subheading="Check out our tourists story with us, they got what they were promised trust, security, protection and more.."
+      />
+      <Stories />
     </>
   );
 };
