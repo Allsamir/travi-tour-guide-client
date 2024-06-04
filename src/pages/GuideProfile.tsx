@@ -11,10 +11,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+
 type Inputs = {
   name: string;
   comment: string;
 };
+
 const GuideProfile: React.FC = () => {
   const publicAxios = usePublicAxios();
   const { id } = useParams();
@@ -23,16 +25,28 @@ const GuideProfile: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const secureAxios = useSecureAxios();
-  const { data: guide, refetch } = useQuery({
-    queryKey: ["guide", "singleGuide"],
-    queryFn: async () => (await publicAxios.get(`/users/user?id=${id}`)).data,
+
+  const {
+    data: guide,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["guide", id],
+    queryFn: async () => {
+      const response = await publicAxios.get(`/users/role?id=${id}&role=guide`);
+      return response.data;
+    },
   });
+
   const handleClick = () => {
-    user ||
+    if (!user) {
       navigate("/login", {
         state: location.pathname,
       });
+    }
   };
+
   const onSubmit: SubmitHandler<Inputs> = (data, event) => {
     const { name, comment } = data;
     if (user) {
@@ -57,14 +71,27 @@ const GuideProfile: React.FC = () => {
         .catch((err) => console.error(err));
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>Error loading guide details</div>;
+  }
+
   return (
     <>
       <Helmet>
-        <title>Travi - Tour Guide | {guide?.name || ""}</title>
+        <title>Travi - Tour Guide | {guide.name || ""}</title>
       </Helmet>
       <PageCover
         text="Put Your Trust"
-        secondText={guide?.name}
+        secondText={guide.name}
         imageURL="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
       <div className="container mx-auto px-4">
@@ -94,7 +121,7 @@ const GuideProfile: React.FC = () => {
           </p>
           <Rate disabled value={guide?.rating} />
           <p className="font-light text-base md:text-xl font-serif">
-            {guide?.skills.map((skill: string, index: number) => (
+            {guide?.skills?.map((skill: string, index: number) => (
               <span className="inline-block px-2" key={index}>
                 {skill}
               </span>
@@ -103,15 +130,15 @@ const GuideProfile: React.FC = () => {
         </div>
         <div className="reviews my-20">
           <SectionTitle heading={`What People Say About ${guide?.name}`} />
-          <div
-            className={`carousel rounded-box p-12
-           gap-20 `}
-          >
-            {guide?.comments.map(
-              (comment: { name: string; comment: string; rating: number }) => (
+          <div className="carousel rounded-box p-12 gap-20">
+            {guide?.comments?.map(
+              (
+                comment: { name: string; comment: string; rating: number },
+                index: number,
+              ) => (
                 <div
                   className="carousel-item shadow-xl p-12 flex-col space-y-4"
-                  key={guide?._id}
+                  key={index}
                 >
                   <p className="font-bold text-xl md:text-2xl font-serif">
                     {comment.name}
@@ -133,7 +160,6 @@ const GuideProfile: React.FC = () => {
                 Rate {guide?.name}
               </p>
               <div className="my-4 text-center">
-                {" "}
                 <Rate onChange={(value: number) => setRatingByUser(value)} />
               </div>
               <div className="form-control">

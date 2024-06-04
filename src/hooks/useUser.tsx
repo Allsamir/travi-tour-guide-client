@@ -6,7 +6,7 @@ const useUser = (role: string) => {
   const { data: guides = [] } = useQuery({
     queryKey: ["guides"],
     queryFn: async () =>
-      (await publicAxios.get(`/users/role?role=${role}`)).data,
+      (await publicAxios.get(`/users/role?id=&role=${role}`)).data,
   });
   return guides;
 };

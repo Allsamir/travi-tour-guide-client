@@ -93,7 +93,7 @@ const TouristGuide: React.FC = () => {
           </TabPanel>
           <TabPanel>
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12">
-              {guides.map((guide: User, index: number) => (
+              {guides?.map((guide: User, index: number) => (
                 <Link to={`/guide-profile/${guide._id}`} key={index}>
                   <div
                     className="bg-base-100 shadow-xl text-center space-y-4 py-12 hover:scale-110 transition"
