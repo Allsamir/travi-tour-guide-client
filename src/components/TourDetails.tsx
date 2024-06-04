@@ -145,7 +145,7 @@ const TourDetails: React.FC = () => {
       <div className="carousel carousel-center rounded-box">
         {guides.map((guide: User, index: number) => (
           <div
-            className="bg-base-100 shadow-xl text-center space-y-4 py-12 carousel-item gap-8 mx-12 px-12 items-center"
+            className="bg-base-100 shadow-xl space-y-4 py-12 carousel-item gap-8 mx-12 px-12 items-center"
             key={index}
           >
             <div>

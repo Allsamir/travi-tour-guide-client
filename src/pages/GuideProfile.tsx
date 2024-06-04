@@ -24,7 +24,7 @@ const GuideProfile: React.FC = () => {
   const navigate = useNavigate();
   const secureAxios = useSecureAxios();
   const { data: guide, refetch } = useQuery({
-    queryKey: ["guide"],
+    queryKey: ["guide", "singleGuide"],
     queryFn: async () => (await publicAxios.get(`/users/user?id=${id}`)).data,
   });
   const handleClick = () => {
@@ -104,14 +104,13 @@ const GuideProfile: React.FC = () => {
         <div className="reviews my-20">
           <SectionTitle heading={`What People Say About ${guide?.name}`} />
           <div
-            className={`carousel rounded-box ${
-              guide?.comments.length && "shadow-xl"
-            } p-12 gap-20 `}
+            className={`carousel rounded-box p-12
+           gap-20 `}
           >
             {guide?.comments.map(
               (comment: { name: string; comment: string; rating: number }) => (
                 <div
-                  className="carousel-item flex-col space-y-4"
+                  className="carousel-item shadow-xl p-12 flex-col space-y-4"
                   key={guide?._id}
                 >
                   <p className="font-bold text-xl md:text-2xl font-serif">
