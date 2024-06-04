@@ -12,6 +12,7 @@ import AllPackages from "./pages/AllPackages";
 import GuideProfile from "./pages/GuideProfile";
 import PackagesBOType from "./components/PackagesBOType";
 import StoryDetails from "./components/StoryDetails";
+import AllStories from "./pages/AllStories";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/story/:id",
         element: <StoryDetails />,
+      },
+      {
+        path: "/all-stories",
+        element: <AllStories />,
       },
     ],
   },

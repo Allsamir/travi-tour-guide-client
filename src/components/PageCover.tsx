@@ -9,7 +9,7 @@ interface ChildProps {
 const PageCover: React.FC<ChildProps> = ({ imageURL, text, secondText }) => {
   return (
     <div
-      className="w-full md:h-[70vh] h-[60vh] bg-cover bg-center relative"
+      className="w-full md:h-[80vh] h-[60vh] bg-cover bg-center relative"
       style={{
         backgroundImage: `url('${imageURL}')`,
       }}

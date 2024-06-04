@@ -12,7 +12,6 @@ const AllPackages: React.FC = () => {
     queryKey: ["packages"],
     queryFn: async () => (await publicAxios.get(`/packages`)).data,
   });
-  console.log(packages);
   return (
     <>
       <Helmet>
