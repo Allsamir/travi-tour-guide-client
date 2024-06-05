@@ -6,7 +6,7 @@ import { Modal, Rate } from "antd";
 import usePublicAxios from "../hooks/usePublicAxios";
 import Package from "../interfaces/Package";
 import TourCard from "./TourCard";
-import useUser from "../hooks/useUser";
+import useGuide from "../hooks/useGuide";
 import User from "../interfaces/User";
 import { Link } from "react-router-dom";
 import ButtonOutline2 from "./ButtonOutline2";
@@ -16,7 +16,7 @@ const TouristGuide: React.FC = () => {
   const [tourdata, setTourdata] = useState<Package[]>([]);
   const [tourDataLoading, settourDataLoading] = useState(true);
   const publicAxios = usePublicAxios();
-  const guides: User[] = useUser("guide");
+  const guides: User[] = useGuide("guide");
   const showModal = () => {
     setIsModalOpen(true);
   };

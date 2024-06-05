@@ -1,15 +1,16 @@
-import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 import React from "react";
+import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
+import { Navigate, useLocation } from "react-router-dom";
+
 interface ChildProps {
   children: React.ReactNode;
 }
-const PrivateRoute: React.FC<ChildProps> = ({ children }) => {
-  const { user, loading } = useAuth();
-  const location = useLocation();
-  const role = useRole();
 
+const AdminRoutes: React.FC<ChildProps> = ({ children }) => {
+  const { user, loading } = useAuth();
+  const role = useRole();
+  const location = useLocation();
   if (loading) {
     return (
       <div className="text-center justify-center flex items-center min-h-screen">
@@ -17,12 +18,11 @@ const PrivateRoute: React.FC<ChildProps> = ({ children }) => {
       </div>
     );
   }
-
-  if ((user && role?.role === "user") || role?.role === "admin") {
+  if (user && role?.role === "admin") {
     return children;
   }
 
-  return <Navigate state={location.pathname} to={"/login"}></Navigate>;
+  return <Navigate to={`/login`} state={location.pathname}></Navigate>;
 };
 
-export default PrivateRoute;
+export default AdminRoutes;

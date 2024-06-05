@@ -10,7 +10,6 @@ import useRole from "../hooks/useRole";
 
 const Navbar: React.FC = () => {
   const role = useRole();
-  console.log(role);
   const navLinks = (
     <>
       <li>

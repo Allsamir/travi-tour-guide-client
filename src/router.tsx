@@ -18,6 +18,14 @@ import PrivateRoute from "./private/PrivateRoute";
 import Profile from "./UserD/Profile";
 import Gprofile from "./GuideD/Profile";
 import Aprofile from "./AdminD/Profile";
+import MyBookings from "./UserD/MyBookings";
+import MyWishList from "./UserD/MyWishList";
+import RequestToAdmin from "./UserD/RequestToAdmin";
+import GuideRoutes from "./private/GuideRoutes";
+import MyAssignedTourist from "./GuideD/MyAssignedTourist";
+import AdminRoutes from "./private/AdminRoutes";
+import AddPackages from "./AdminD/AddPackages";
+import ManageUsers from "./AdminD/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +94,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // user routes
       {
         path: "user-profile",
         element: (
@@ -95,19 +104,69 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "guide-profile",
+        path: "my-bookings",
         element: (
           <PrivateRoute>
-            <Gprofile />
+            <MyBookings />
           </PrivateRoute>
         ),
       },
       {
-        path: "admin-profile",
+        path: "my-wishlist",
         element: (
           <PrivateRoute>
-            <Aprofile />
+            <MyWishList />
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "request-admin",
+        element: (
+          <PrivateRoute>
+            <RequestToAdmin />
+          </PrivateRoute>
+        ),
+      },
+      // guides routes
+      {
+        path: "guide-profile",
+        element: (
+          <GuideRoutes>
+            <Gprofile />
+          </GuideRoutes>
+        ),
+      },
+      {
+        path: "my-assigned-tourists",
+        element: (
+          <GuideRoutes>
+            <MyAssignedTourist />
+          </GuideRoutes>
+        ),
+      },
+      // admin routes
+      {
+        path: "admin-profile",
+        element: (
+          <AdminRoutes>
+            <Aprofile />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "add-packages",
+        element: (
+          <AdminRoutes>
+            <AddPackages />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manage-packages",
+        element: (
+          <AdminRoutes>
+            <ManageUsers />
+          </AdminRoutes>
         ),
       },
     ],

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import usePublicAxios from "./usePublicAxios";
 
-const useUser = (role: string) => {
+const useGuide = (role: string) => {
   const publicAxios = usePublicAxios();
   const { data: guides = [] } = useQuery({
     queryKey: ["guides"],
@@ -11,4 +11,4 @@ const useUser = (role: string) => {
   return guides;
 };
 
-export default useUser;
+export default useGuide;

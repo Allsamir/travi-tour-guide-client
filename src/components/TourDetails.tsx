@@ -3,7 +3,7 @@ import Package from "../interfaces/Package";
 import usePublicAxios from "../hooks/usePublicAxios";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import User from "../interfaces/User";
-import useUser from "../hooks/useUser";
+import useGuide from "../hooks/useGuide";
 import { Rate } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
@@ -31,7 +31,7 @@ const TourDetails: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const secureAxios = useSecureAxios();
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const guides: User[] = useUser("guide");
+  const guides: User[] = useGuide("guide");
   const location = useLocation();
   const { user } = useAuth();
   const navigate = useNavigate();
