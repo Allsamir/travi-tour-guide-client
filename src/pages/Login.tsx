@@ -22,8 +22,7 @@ const Login: React.FC = () => {
   const location = useLocation();
   const signInWithGoogle = () => {
     googleProvider()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location.state || "/");
       })
       .catch((err) => console.error(err));

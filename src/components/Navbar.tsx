@@ -9,7 +9,7 @@ import { IoIosNotifications } from "react-icons/io";
 import useRole from "../hooks/useRole";
 
 const Navbar: React.FC = () => {
-  const role = useRole();
+  const { role } = useRole();
   const navLinks = (
     <>
       <li>

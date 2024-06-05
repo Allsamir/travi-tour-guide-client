@@ -40,7 +40,7 @@ const StoryDetails: React.FC = () => {
       </h2>
       <div className="content text-center mb-20">
         <img
-          src="https://cdn.openai.com/labs/images/High%20quality%20photo%20of%20a%20monkey%20astronaut.webp?v=1"
+          src={story?.profileImage}
           alt="Demo Image"
           className="w-36 rounded-full mx-auto"
         />

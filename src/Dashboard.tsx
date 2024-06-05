@@ -1,7 +1,9 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import useRole from "./hooks/useRole";
 
 const Dashboard: React.FC = () => {
+  const { role } = useRole();
   return (
     <>
       <div className="drawer drawer-end">
@@ -53,12 +55,59 @@ const Dashboard: React.FC = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-secondaryColor text-primaryColor bg-opacity-45">
+          <ul className="menu p-8 w-80 min-h-full bg-secondaryColor text-primaryColor bg-opacity-45 gap-6">
+            {role.role === "admin" ? (
+              <>
+                <li>
+                  <NavLink to={`/dashboard/admin-profile`}>My Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/add-packages`}>Add Packages</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/manage-packages`}>
+                    Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/post-blogs`}>Post Blogs</NavLink>
+                </li>
+              </>
+            ) : role.role === "guide" ? (
+              <>
+                <li>
+                  <NavLink to={`/dashboard/guide-profile`}>My Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/my-assigned-tourists`}>
+                    My Assigned Tourists
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink to={`/dashboard/user-profile`}>My Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/my-bookings`}>My Bookings</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/my-wishlist`}>My WishList</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/request-admin`}>
+                    Request Admin
+                  </NavLink>
+                </li>
+              </>
+            )}
+            <div className="divider"></div>
             <li>
-              <a>Sidebar Item 1</a>
+              <Link to={`/`}>Home</Link>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <Link to={`/blogs`}>Blogs</Link>
             </li>
           </ul>
         </div>

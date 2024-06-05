@@ -9,9 +9,9 @@ interface ChildProps {
 
 const GuideRoutes: React.FC<ChildProps> = ({ children }) => {
   const { user, loading } = useAuth();
-  const role = useRole();
+  const { role, isLoading } = useRole();
   const location = useLocation();
-  if (loading) {
+  if (loading || isLoading) {
     return (
       <div className="text-center justify-center flex items-center min-h-screen">
         <span className="loading loading-spinner loading-lg"></span>
