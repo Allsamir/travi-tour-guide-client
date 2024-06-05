@@ -13,6 +13,11 @@ import GuideProfile from "./pages/GuideProfile";
 import PackagesBOType from "./components/PackagesBOType";
 import StoryDetails from "./components/StoryDetails";
 import AllStories from "./pages/AllStories";
+import Dashboard from "./Dashboard";
+import PrivateRoute from "./private/PrivateRoute";
+import Profile from "./UserD/Profile";
+import Gprofile from "./GuideD/Profile";
+import Aprofile from "./AdminD/Profile";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +77,40 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "user-profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "guide-profile",
+        element: (
+          <PrivateRoute>
+            <Gprofile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "admin-profile",
+        element: (
+          <PrivateRoute>
+            <Aprofile />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 

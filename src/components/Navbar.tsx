@@ -6,8 +6,11 @@ import useAuth from "../hooks/useAuth";
 import ButtonOutline from "./ButtonOutline";
 import Swal from "sweetalert2";
 import { IoIosNotifications } from "react-icons/io";
+import useRole from "../hooks/useRole";
 
 const Navbar: React.FC = () => {
+  const role = useRole();
+  console.log(role);
   const navLinks = (
     <>
       <li>
@@ -73,7 +76,13 @@ const Navbar: React.FC = () => {
                       <p className="lowercase">{user.email}</p>
                     </div>
                     <li>
-                      <Link to={``}>Dashboard</Link>
+                      {role?.role === "admin" ? (
+                        <Link to={`/dashboard/admin-profile`}>Dashboard</Link>
+                      ) : role?.role === "guide" ? (
+                        <Link to={`/dashboard/guide-profile`}>Dashboard</Link>
+                      ) : (
+                        <Link to={`/dashboard/user-profile`}>Dashboard</Link>
+                      )}
                     </li>
                     <li>
                       <Link to={``}>

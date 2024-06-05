@@ -144,34 +144,36 @@ const TourDetails: React.FC = () => {
       <p></p>
       <div className="carousel carousel-center rounded-box">
         {guides.map((guide: User, index: number) => (
-          <div
-            className="bg-base-100 shadow-xl space-y-4 py-12 carousel-item gap-8 mx-12 px-12 items-center"
-            key={index}
-          >
-            <div>
-              <img
-                src={guide.profilePicture}
-                alt={guide.name}
-                className="w-24 rounded-full mx-auto"
-              />
-            </div>
-            <div>
-              <h1 className="text-xl font-serif font-bold">{guide.name}</h1>
-              <p className="text-base font-serif font-semibold">
-                {guide.role.toUpperCase()}
-              </p>
-            </div>
-            <div>
-              {guide.comments?.slice(0, 1).map((comment, index) => (
-                <p className="text-[13px]" key={index}>
-                  {comment.comment}
+          <Link to={`/guide-profile/${guide._id}`}>
+            <div
+              className="bg-base-100 shadow-xl space-y-4 py-12 carousel-item gap-8 mx-12 px-12 items-center"
+              key={index}
+            >
+              <div>
+                <img
+                  src={guide.profilePicture}
+                  alt={guide.name}
+                  className="w-24 rounded-full mx-auto"
+                />
+              </div>
+              <div>
+                <h1 className="text-xl font-serif font-bold">{guide.name}</h1>
+                <p className="text-base font-serif font-semibold">
+                  {guide.role.toUpperCase()}
                 </p>
-              ))}
+              </div>
+              <div>
+                {guide.comments?.slice(0, 1).map((comment, index) => (
+                  <p className="text-[13px]" key={index}>
+                    {comment.comment}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <Rate disabled defaultValue={guide.rating} />
+              </div>
             </div>
-            <div>
-              <Rate disabled defaultValue={guide.rating} />
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
       <SectionTitle heading="Book Your Trip Today!" />
