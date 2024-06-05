@@ -1,4 +1,6 @@
 import axios from "axios";
+import { signOut } from "firebase/auth";
+import { auth } from "../config/firebase.config";
 
 const secureAxios = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -24,9 +26,13 @@ const useSecureAxios = () => {
       // Do something with response data
       return response;
     },
-    function (error) {
+    async function (error) {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
+      const status = error.response?.status;
+      if (status === 401 || status === 403) {
+        await signOut(auth).then(() => console.log("user signout"));
+      }
       return Promise.reject(error);
     },
   );
