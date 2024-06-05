@@ -1,9 +1,11 @@
 import React from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
 import useRole from "./hooks/useRole";
 
 const Dashboard: React.FC = () => {
   const { role } = useRole();
+  const location = useLocation();
+  console.log(location.pathname);
   return (
     <>
       <div className="drawer drawer-end">
@@ -22,7 +24,7 @@ const Dashboard: React.FC = () => {
             <div className="flex-none">
               <label
                 htmlFor="my-drawer-4"
-                className="btn btn-circle swap swap-rotate"
+                className="btn btn-circle swap swap-rotate bg-primaryColor text-secondaryColor"
               >
                 <svg
                   className="swap-off fill-current"
@@ -47,6 +49,7 @@ const Dashboard: React.FC = () => {
               </label>
             </div>
           </div>
+          {location.pathname === "/dashboard" && <Navigate to={`/`}></Navigate>}
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -56,7 +59,7 @@ const Dashboard: React.FC = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu p-8 w-80 min-h-full bg-secondaryColor text-primaryColor bg-opacity-45 gap-6">
-            {role.role === "admin" ? (
+            {role?.role === "admin" ? (
               <>
                 <li>
                   <NavLink to={`/dashboard/admin-profile`}>My Profile</NavLink>
@@ -73,7 +76,7 @@ const Dashboard: React.FC = () => {
                   <NavLink to={`/dashboard/post-blogs`}>Post Blogs</NavLink>
                 </li>
               </>
-            ) : role.role === "guide" ? (
+            ) : role?.role === "guide" ? (
               <>
                 <li>
                   <NavLink to={`/dashboard/guide-profile`}>My Profile</NavLink>
