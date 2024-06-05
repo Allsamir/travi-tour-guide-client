@@ -27,11 +27,13 @@ import AdminRoutes from "./private/AdminRoutes";
 import AddPackages from "./AdminD/AddPackages";
 import ManageUsers from "./AdminD/ManageUsers";
 import PostBlogs from "./AdminD/PostBlogs";
+import ErrorElement from "./ErrorElement";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "/",
