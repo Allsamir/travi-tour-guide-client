@@ -5,7 +5,6 @@ import useRole from "./hooks/useRole";
 const Dashboard: React.FC = () => {
   const { role } = useRole();
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <>
       <div className="drawer drawer-end">
@@ -91,6 +90,11 @@ const Dashboard: React.FC = () => {
               <>
                 <li>
                   <NavLink to={`/dashboard/user-profile`}>My Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/update-profile`}>
+                    Update Profile
+                  </NavLink>
                 </li>
                 <li>
                   <NavLink to={`/dashboard/my-bookings`}>My Bookings</NavLink>

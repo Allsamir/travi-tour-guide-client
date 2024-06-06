@@ -28,6 +28,7 @@ import AddPackages from "./AdminD/AddPackages";
 import ManageUsers from "./AdminD/ManageUsers";
 import PostBlogs from "./AdminD/PostBlogs";
 import ErrorElement from "./ErrorElement";
+import UpdateProfile from "./UserD/UpdateProfile";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyWishList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
           </PrivateRoute>
         ),
       },

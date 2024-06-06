@@ -81,7 +81,11 @@ const GuideProfile: React.FC = () => {
   }
 
   if (isError) {
-    return <div>Error loading guide details</div>;
+    return (
+      <div className="flex justify-center items-center h-screen text-2xl font-semibold">
+        Error loading guide details
+      </div>
+    );
   }
 
   return (
