@@ -4,8 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
-import ButtonOutline from "../components/ButtonOutline";
 import { Helmet } from "react-helmet-async";
+import ButtonOutline2 from "../components/ButtonOutline2";
 type Inputs = {
   email: string;
   password: string;
@@ -54,26 +54,14 @@ const Login: React.FC = () => {
       <Helmet>
         <title>Travi - Tour Guide | Login</title>
       </Helmet>
-      <div className="bg-secondaryColor">
-        <div className="lg:flex justify-center items-center container mx-auto px-4 min-h-screen">
-          <div className="lg:w-5/12">
-            <img
-              src={`https://media1.tenor.com/m/4Ei6bAIjMZ0AAAAC/crypto.gif`}
-              alt="GIF Login Now"
-              className="mx-auto"
-            />
-          </div>
-          <div className="flex-1 mt-12">
+      <div className="hero-content mx-auto mb-20">
+        <div className="lg:flex gap-12 justify-center items-center container mx-auto px-4 h-screen">
+          <div className="flex-1 mx-auto mt-12 shadow-2xl mb-12">
             <div className="card shrink-0 w-full ">
-              <h3 className="text-2xl md:text-4xl text-primaryColor font-semibold text-center uppercase">
-                Login Now!
-              </h3>
               <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-primaryColor font-semibold">
-                      Email
-                    </span>
+                    <span className="label-text  font-semibold">Email</span>
                   </label>
                   <input
                     type="email"
@@ -85,9 +73,7 @@ const Login: React.FC = () => {
                 </div>
                 <div className="form-control relative ">
                   <label className="label">
-                    <span className="label-text text-primaryColor font-semibold">
-                      Password
-                    </span>
+                    <span className="label-text font-semibold">Password</span>
                   </label>
                   <input
                     type={isPasswordVisible ? "text" : "password"}
@@ -114,24 +100,34 @@ const Login: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <ButtonOutline text="Login" buttonType="submit"></ButtonOutline>
+                <ButtonOutline2
+                  text="Login"
+                  buttonType="submit"
+                ></ButtonOutline2>
                 <button
-                  className="btn btn-outline  text-primaryColor hover:text-secondaryColor hover:bg-primaryColor hover:border-none uppercase"
+                  className="btn btn-outline  text-secondaryColor hover:text-secondaryColor hover:bg-secondaryColor hover:border-none uppercase"
                   onClick={signInWithGoogle}
                 >
                   <FcGoogle />
                 </button>
               </form>
-              <p className="text-center pb-8 text-primaryColor">
+              <p className="text-center pb-8 text-textColor">
                 New Here?{" "}
                 <Link
                   to={`/register`}
-                  className="underline-offset-auto hover:text-titleColor"
+                  className="underline-offset-auto text-secondaryColor"
                 >
                   Create a New Account
                 </Link>
               </p>
             </div>
+          </div>
+          <div className="flex-1">
+            <img
+              src={`http://quickdevs.com/demo/travi/images/commons/travi-11.jpg`}
+              alt="GIF Login Now"
+              className="mx-auto"
+            />
           </div>
         </div>
       </div>

@@ -6,9 +6,9 @@ import { auth } from "../config/firebase.config";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import ButtonOutline from "../components/ButtonOutline";
 import usePublicAxios from "../hooks/usePublicAxios";
 import { Helmet } from "react-helmet-async";
+import ButtonOutline2 from "../components/ButtonOutline2";
 type Inputs = {
   name: string;
   email: string;
@@ -98,26 +98,14 @@ const Register: React.FC = () => {
       <Helmet>
         <title>Travi - Tour Guide | Register</title>
       </Helmet>
-      <div className="bg-secondaryColor">
-        <div className="lg:flex justify-center items-center container mx-auto px-4 min-h-screen">
-          <div className="lg:w-5/12">
-            <img
-              src={`https://media1.tenor.com/m/rIUtVGL4sO0AAAAC/register-now-register-now-the-browser.gif`}
-              alt="GIF Register Now"
-              className="mx-auto"
-            />
-          </div>
-          <div className="flex-1 mt-12">
+      <div className="hero mx-auto mb-20">
+        <div className="lg:flex lg:flex-row flex-col gap-12 justify-center items-center container mx-auto px-4 h-screen lg:hero-content">
+          <div className="flex-1 mt-12 shadow-2xl mb-12">
             <div className="card shrink-0 w-full ">
-              <h3 className="text-2xl md:text-4xl text-primaryColor font-semibold text-center uppercase">
-                Register Now!
-              </h3>
               <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-primaryColor font-semibold">
-                      Name
-                    </span>
+                    <span className="label-text  font-semibold">Name</span>
                   </label>
                   <input
                     type="text"
@@ -129,9 +117,7 @@ const Register: React.FC = () => {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-primaryColor font-semibold">
-                      Email
-                    </span>
+                    <span className="label-text  font-semibold">Email</span>
                   </label>
                   <input
                     type="email"
@@ -143,9 +129,7 @@ const Register: React.FC = () => {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-primaryColor font-semibold">
-                      Photo URL
-                    </span>
+                    <span className="label-text  font-semibold">Photo URL</span>
                   </label>
                   <input
                     type="text"
@@ -157,9 +141,7 @@ const Register: React.FC = () => {
                 </div>
                 <div className="form-control relative ">
                   <label className="label">
-                    <span className="label-text text-primaryColor font-semibold">
-                      Password
-                    </span>
+                    <span className="label-text  font-semibold">Password</span>
                   </label>
                   <input
                     type={isPasswordVisible ? "text" : "password"}
@@ -186,24 +168,31 @@ const Register: React.FC = () => {
                     case, one number and one special character
                   </span>
                 )}
-                <ButtonOutline text="Register" buttonType="submit" />
+                <ButtonOutline2 text="Register" buttonType="submit" />
                 <button
-                  className="btn btn-outline  text-primaryColor hover:text-secondaryColor hover:bg-primaryColor hover:border-none uppercase"
+                  className="btn btn-outline   hover:text-secondaryColor hover:bg-secondaryColor hover:border-none uppercase"
                   onClick={signInWithGoogle}
                 >
                   <FcGoogle />
                 </button>
               </form>
-              <p className="text-center pb-8 text-primaryColor">
+              <p className="text-center pb-8 ">
                 Already Registered?{" "}
                 <Link
                   to={`/login`}
-                  className="underline-offset-auto hover:text-titleColor"
+                  className="underline-offset-auto text-secondaryColor"
                 >
-                  Login
+                  Login here
                 </Link>
               </p>
             </div>
+          </div>
+          <div className="flex-1">
+            <img
+              src={`http://quickdevs.com/demo/travi/images/commons/travi-3.jpg`}
+              alt="GIF Register Now"
+              className="mx-auto"
+            />
           </div>
         </div>
       </div>
