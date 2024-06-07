@@ -286,7 +286,7 @@ const TourDetails: React.FC = () => {
         confirmLoading={confirmLoading}
       >
         <div className="text-center my-16">
-          <Link to={`/home`} className="text-xl font-bold">
+          <Link to={`/dashboard/my-bookings`} className="text-xl font-bold">
             My Bookings Page
           </Link>
         </div>
