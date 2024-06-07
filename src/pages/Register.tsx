@@ -135,7 +135,6 @@ const Register: React.FC = () => {
                     type="text"
                     placeholder="Any social media profile photo link"
                     className="input input-bordered"
-                    required
                     {...register("photoURL")}
                   />
                 </div>

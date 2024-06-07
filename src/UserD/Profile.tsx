@@ -105,16 +105,16 @@ const Profile: React.FC = () => {
         <div className="my-20">
           <div className="profile-image">
             <img
-              src={userInfo?.profilePicture}
-              alt={userInfo?.name}
+              src={user?.photoURL || ""}
+              alt={user?.displayName || ""}
               className="mx-auto w-36 rounded-full"
             />
           </div>
           <div className="user-info my-12 text-center space-y-3">
             <h2 className="font-serif font-semibold text-2xl md:text-4xl">
-              {userInfo?.name}
+              {user?.displayName}
             </h2>
-            <p className="email font-light text-base">{userInfo?.email}</p>
+            <p className="email font-light text-base">{user?.email}</p>
             <p className="email font-normal text-base uppercase">
               {userInfo?.role}
             </p>
