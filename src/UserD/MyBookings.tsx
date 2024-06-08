@@ -73,7 +73,6 @@ const MyBookings: React.FC = () => {
       }
     });
   };
-  console.log(bookings);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -87,6 +86,18 @@ const MyBookings: React.FC = () => {
       <div className="flex justify-center items-center h-screen text-2xl font-semibold">
         Error loading Bookings details
       </div>
+    );
+  }
+  if (bookings.length < 0) {
+    return (
+      <>
+        <Helmet>
+          <title>Travi - Dashboard | My Bookings</title>
+        </Helmet>
+        <div className="flex justify-center items-center h-screen">
+          <p>Your Booking List is Empty</p>
+        </div>
+      </>
     );
   }
   return (
