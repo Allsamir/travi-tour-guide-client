@@ -4,19 +4,16 @@ import { Helmet } from "react-helmet-async";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import ButtonOutline2 from "../components/ButtonOutline2";
+import Swal from "sweetalert2";
 
 interface Combine {
   _id: string;
   email: string;
-
   name: string;
-
   photoURL: string;
   guide: string;
   price: number;
-
   date: string;
-
   status: string;
   packageID: string;
   packageDetails: {
@@ -42,11 +39,40 @@ const MyBookings: React.FC = () => {
     isError,
     isLoading,
     data: bookings,
+    refetch,
   } = useQuery({
     queryKey: ["my-bookings"],
     queryFn: async () =>
       (await secureAxios.get(`/bookings?email=${user?.email}`)).data,
   });
+  const handleCancle = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        secureAxios
+          .delete(`/bookings?email=${user?.email}&id=${id}`)
+          .then((res) => {
+            if (res.data.success) {
+              Swal.fire({
+                title: "Successful",
+                text: `${res.data.message}`,
+                icon: "success",
+                confirmButtonText: "Close",
+              });
+              refetch();
+            }
+          })
+          .catch((err) => console.error(err));
+      }
+    });
+  };
   console.log(bookings);
   if (isLoading) {
     return (
@@ -99,7 +125,13 @@ const MyBookings: React.FC = () => {
                     <td>
                       {tourPackage.status === "In Review" ||
                       tourPackage.status === "Rejected" ? (
-                        <ButtonOutline2 text="Cancel" />
+                        <button
+                          type={`button`}
+                          className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
+                          onClick={() => handleCancle(tourPackage._id)}
+                        >
+                          Cancel
+                        </button>
                       ) : (
                         <ButtonOutline2 text="Pay" />
                       )}
