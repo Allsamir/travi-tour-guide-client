@@ -53,7 +53,7 @@ const MyBookings: React.FC = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
         secureAxios
@@ -88,7 +88,7 @@ const MyBookings: React.FC = () => {
       </div>
     );
   }
-  if (bookings.length < 0) {
+  if (bookings.length === 0) {
     return (
       <>
         <Helmet>

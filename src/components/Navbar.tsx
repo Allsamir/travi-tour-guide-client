@@ -40,6 +40,7 @@ const Navbar: React.FC = () => {
         confirmButtonText: "Close",
       }),
     );
+    localStorage.removeItem("wishList");
   };
   return (
     <>

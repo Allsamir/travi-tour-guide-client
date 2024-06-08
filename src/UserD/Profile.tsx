@@ -34,7 +34,6 @@ const Profile: React.FC = () => {
   });
   const onSubmit: SubmitHandler<IFormInput> = (data, event) => {
     const imgFile = { image: data.image[0] };
-    console.log(data, userRating);
     publicAxios
       .post(imgbbURL, imgFile, {
         headers: {
@@ -95,7 +94,6 @@ const Profile: React.FC = () => {
       </div>
     );
   }
-  console.log(userInfo);
   return (
     <>
       <Helmet>
