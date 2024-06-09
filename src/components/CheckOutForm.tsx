@@ -1,75 +1,51 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-const CheckOutForm: React.FC = () => {
+import useSecureAxios from "../hooks/useSecureAxios";
+interface ChildProps {
+  id?: string;
+}
+const CheckOutForm: React.FC<ChildProps> = ({ id }) => {
   const stripe = useStripe();
   const elements = useElements();
-
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const secureAxios = useSecureAxios();
 
-  useEffect(() => {
-    if (!stripe) {
-      return;
-    }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret",
-    );
-
-    if (!clientSecret) {
-      return;
-    }
-
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent?.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
-          break;
-        case "processing":
-          setMessage("Your payment is processing.");
-          break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
-        default:
-          setMessage("Something went wrong.");
-          break;
-      }
-    });
-  }, [stripe]);
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
     setIsLoading(true);
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url: `${window.location.origin}/dashboard/payment-completion`,
       },
+      redirect: "if_required",
     });
-
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error?.message as string);
+    if (error) {
+      setMessage(error.message || "");
+    } else if (paymentIntent.status === "succeeded") {
+      setMessage(
+        "Payment status: " +
+          paymentIntent.status +
+          "🎉. Your transaction id: " +
+          paymentIntent.id,
+      );
     } else {
       setMessage("An unexpected error occurred.");
+    }
+
+    if (!error) {
+      secureAxios
+        .patch(`/bookings/paid?id=${id}`)
+        .then((res) => res.data.success && console.log("Paid"));
     }
 
     setIsLoading(false);
@@ -94,7 +70,11 @@ const CheckOutForm: React.FC = () => {
             </span>
           </button>
           {/* Show any error or success messages */}
-          {message && <div id="payment-message">{message}</div>}
+          {message && (
+            <div id="payment-message">
+              <p className="mt-4">{message}</p>
+            </div>
+          )}
         </form>
       </div>
     </div>

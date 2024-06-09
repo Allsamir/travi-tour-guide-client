@@ -3,7 +3,6 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
-import ButtonOutline2 from "../components/ButtonOutline2";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
@@ -16,6 +15,7 @@ interface Combine {
   price: number;
   date: string;
   status: string;
+  paid: boolean;
   packageID: string;
   packageDetails: {
     _id: string;
@@ -146,7 +146,12 @@ const MyBookings: React.FC = () => {
                         </button>
                       ) : (
                         <Link to={`/dashboard/payment/${bookingData._id}`}>
-                          <ButtonOutline2 text="Pay" />
+                          <button
+                            disabled={bookingData?.paid}
+                            className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
+                          >
+                            {bookingData.paid ? "Paid" : "Pay"}
+                          </button>
                         </Link>
                       )}
                     </td>

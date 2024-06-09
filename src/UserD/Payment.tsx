@@ -51,7 +51,7 @@ const Payment: React.FC = () => {
       <div className="App">
         {data && (
           <Elements options={options} stripe={stripePromise}>
-            <CheckOutForm />
+            <CheckOutForm id={id} />
           </Elements>
         )}
       </div>

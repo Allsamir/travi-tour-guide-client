@@ -11,6 +11,7 @@ interface Bookings {
   date: Date;
 
   status: string;
+  paid: boolean;
   packageID: string;
 }
 
