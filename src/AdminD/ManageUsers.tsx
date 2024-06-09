@@ -1,6 +1,6 @@
 import React from "react";
 
-const ManageUsers = () => {
+const ManageUsers: React.FC = () => {
   return <div>ManageUsers</div>;
 };
 

@@ -48,7 +48,7 @@ const TouristGuide: React.FC = () => {
               className="w-full h-[70vh] bg-cover bg-center mt-8 flex justify-center items-center"
               style={{
                 backgroundImage:
-                  "url('http://quickdevs.com/demo/travi/images/commons/video-bg.jpg')",
+                  "url('https://roam.qodeinteractive.com/wp-content/uploads/2017/08/home-1-video-button-bckgr-image.jpg')",
               }}
             >
               <FaRegPlayCircle

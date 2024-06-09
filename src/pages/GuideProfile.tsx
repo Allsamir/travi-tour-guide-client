@@ -103,7 +103,7 @@ const GuideProfile: React.FC = () => {
           <img
             src={guide?.profilePicture}
             alt={guide?.name}
-            className="w-34 rounded-full mx-auto"
+            className="w-36 rounded-full mx-auto"
           />
           <p className="font-bold text-xl md:text-2xl font-serif">
             {guide?.name}

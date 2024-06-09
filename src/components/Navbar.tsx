@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
         <div className="flex-1">
           <a className="text-xl">
             <img
-              src="http://quickdevs.com/demo/travi/images/logos/logo.png"
+              src="https://i.ibb.co/WPkYFQ3/Travi-logo.png"
               alt=""
               className="w-52"
             />

@@ -188,7 +188,7 @@ const Register: React.FC = () => {
           </div>
           <div className="flex-1">
             <img
-              src={`http://quickdevs.com/demo/travi/images/commons/travi-3.jpg`}
+              src={`https://backpacktraveler.qodeinteractive.com/wp-content/uploads/2018/08/single-post-1-img-2.jpg`}
               alt="GIF Register Now"
               className="mx-auto"
             />

@@ -124,7 +124,7 @@ const Login: React.FC = () => {
           </div>
           <div className="flex-1">
             <img
-              src={`http://quickdevs.com/demo/travi/images/commons/travi-11.jpg`}
+              src={`https://backpacktraveler.qodeinteractive.com/wp-content/uploads/2018/08/single-post-4.jpg`}
               alt="GIF Login Now"
               className="mx-auto"
             />

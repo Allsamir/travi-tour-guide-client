@@ -153,6 +153,7 @@ const Profile: React.FC = () => {
                       id="fixed-tags-demo"
                       value={value}
                       onChange={(event, newValue) => {
+                        console.log(event);
                         setValue([
                           ...fixedOptions,
                           ...newValue.filter(

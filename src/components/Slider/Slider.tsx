@@ -24,7 +24,7 @@ const Slider: React.FC = () => {
             className="w-full h-full  bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('http://quickdevs.com/demo/travi/images/commons/hero-image.jpg')",
+                "url('https://roam.qodeinteractive.com/wp-content/uploads/2017/08/h4-masonry-gallery-img-1.jpg')",
             }}
           >
             <div
@@ -45,7 +45,7 @@ const Slider: React.FC = () => {
             className="w-full h-full bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('http://quickdevs.com/demo/travi/images/commons/slider-bg-4.jpg')",
+                "url('https://roam.qodeinteractive.com/wp-content/uploads/2017/08/destitnation-title-img-1.jpg')",
             }}
           >
             <div
@@ -66,7 +66,7 @@ const Slider: React.FC = () => {
             className="w-full h-full bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('http://quickdevs.com/demo/travi/images/commons/slider-bg-3.jpg')",
+                "url('https://roam.qodeinteractive.com/wp-content/uploads/2017/08/destitnation-title-img-5.jpg')",
             }}
           >
             <div
@@ -87,7 +87,7 @@ const Slider: React.FC = () => {
             className="w-full h-full bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('http://quickdevs.com/demo/travi/images/commons/slider-bg-2.jpg')",
+                "url('https://roam.qodeinteractive.com/wp-content/uploads/2017/08/destitnation-title-img-1.jpg')",
             }}
           >
             <div
