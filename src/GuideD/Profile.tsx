@@ -13,7 +13,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Swal from "sweetalert2";
 
 interface IFormInput {
-  name: string;
   profilePicture: string;
 }
 const Profile: React.FC = () => {
@@ -35,7 +34,6 @@ const Profile: React.FC = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data, event) => {
     secureAxios
       .patch(`/users/updateGuideProfile?id=${guide?._id}`, {
-        name: data.name,
         profilePicture: data.profilePicture,
         skills: value,
       })
@@ -64,8 +62,9 @@ const Profile: React.FC = () => {
     "Guiding",
     "Helping",
     "Cooking",
+    "Camping",
+    "Running",
   ];
-  console.log(value);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -132,17 +131,6 @@ const Profile: React.FC = () => {
             <div className="hero-content flex-col w-full lg:w-1/2 md:w-4/5 lg:flex-row-reverse">
               <div className="card shrink-0 w-full shadow-2xl bg-base-100">
                 <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Update Your Name</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Update Your Name"
-                      className="input input-bordered"
-                      {...register("name")}
-                    />
-                  </div>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">
