@@ -29,6 +29,8 @@ import ManageUsers from "./AdminD/ManageUsers";
 import PostBlogs from "./AdminD/PostBlogs";
 import ErrorElement from "./ErrorElement";
 import UpdateProfile from "./UserD/UpdateProfile";
+import Payment from "./UserD/Payment";
+import PaymentCompletion from "./components/PaymentCompletion";
 
 const router = createBrowserRouter([
   {
@@ -138,6 +140,14 @@ const router = createBrowserRouter([
             <RequestToAdmin />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "payment/:id",
+        element: <Payment />,
+      },
+      {
+        path: "payment-completion",
+        element: <PaymentCompletion />,
       },
       // guides routes
       {

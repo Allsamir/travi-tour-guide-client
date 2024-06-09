@@ -5,6 +5,7 @@ import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import ButtonOutline2 from "../components/ButtonOutline2";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 interface Combine {
   _id: string;
@@ -122,29 +123,31 @@ const MyBookings: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {bookings.map((tourPackage: Combine, index: number) => {
-                const date = new Date(tourPackage.date);
+              {bookings.map((bookingData: Combine, index: number) => {
+                const date = new Date(bookingData.date);
                 return (
                   <tr key={index} className="font-semibold">
                     <th>{index + 1}</th>
-                    <td>{tourPackage.packageDetails.title}</td>
-                    <td>{tourPackage.guide}</td>
+                    <td>{bookingData.packageDetails.title}</td>
+                    <td>{bookingData.guide}</td>
                     <td>{date.toDateString()}</td>
                     <td>{date.toLocaleTimeString()}</td>
-                    <td>${tourPackage.price}</td>
-                    <td>{tourPackage.status}</td>
+                    <td>${bookingData.price}</td>
+                    <td>{bookingData.status}</td>
                     <td>
-                      {tourPackage.status === "In Review" ||
-                      tourPackage.status === "Rejected" ? (
+                      {bookingData.status === "In Review" ||
+                      bookingData.status === "Rejected" ? (
                         <button
                           type={`button`}
                           className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
-                          onClick={() => handleCancle(tourPackage._id)}
+                          onClick={() => handleCancle(bookingData._id)}
                         >
                           Cancel
                         </button>
                       ) : (
-                        <ButtonOutline2 text="Pay" />
+                        <Link to={`/dashboard/payment/${bookingData._id}`}>
+                          <ButtonOutline2 text="Pay" />
+                        </Link>
                       )}
                     </td>
                   </tr>
