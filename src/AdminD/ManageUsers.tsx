@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useSecureAxios from "../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -8,15 +8,23 @@ import Swal from "sweetalert2";
 const ManageUsers: React.FC = () => {
   const secureAxios = useSecureAxios();
   const [tableIndex, setTabelIndex] = useState<number>();
+  const [searchValue, setSearchValue] = useState("");
   const {
     isError,
     isLoading,
     data: users,
     refetch,
   } = useQuery({
-    queryKey: ["all-users"],
-    queryFn: async () => (await secureAxios.get(`/users`)).data,
+    queryKey: ["all-users", searchValue],
+    queryFn: async () =>
+      (await secureAxios.get(`/users?searchIndex=${searchValue}`)).data,
   });
+  console.log(searchValue);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const search = e.target as HTMLFormElement;
+    setSearchValue(search.searchIndex.value);
+  };
   const handleRole = (id: string, role: string, index: number) => {
     console.log(index);
     Swal.fire({
@@ -70,6 +78,32 @@ const ManageUsers: React.FC = () => {
       </Helmet>
       <div className="container mx-auto px-4">
         <div className="my-20">
+          <div className="searchBox w-full lg:w-1/2 md:w-4/5 mx-auto mb-20">
+            <form onSubmit={handleSubmit}>
+              <label className="input input-bordered flex items-center gap-2">
+                <input
+                  type="text"
+                  className="grow"
+                  placeholder="Search Name"
+                  name="searchIndex"
+                />
+                <button type="submit">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="w-4 h-4 opacity-70 hover:cursor-pointer hover:text-secondaryColor hover:scale-125"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </label>
+            </form>
+          </div>
           <div className="overflow-x-auto">
             <table className="table table-zebra">
               {/* head */}
