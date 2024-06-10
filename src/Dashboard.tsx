@@ -67,9 +67,7 @@ const Dashboard: React.FC = () => {
                   <NavLink to={`/dashboard/add-packages`}>Add Packages</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/dashboard/manage-packages`}>
-                    Manage Users
-                  </NavLink>
+                  <NavLink to={`/dashboard/manage-users`}>Manage Users</NavLink>
                 </li>
                 <li>
                   <NavLink to={`/dashboard/post-blogs`}>Post Blogs</NavLink>

@@ -4,26 +4,39 @@ import useSecureAxios from "../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
 import User from "../interfaces/User";
 import Swal from "sweetalert2";
-
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 const ManageUsers: React.FC = () => {
   const secureAxios = useSecureAxios();
   const [tableIndex, setTabelIndex] = useState<number>();
   const [searchValue, setSearchValue] = useState("");
+  const [searchRole, setSearchRole] = useState("");
   const {
     isError,
     isLoading,
     data: users,
     refetch,
   } = useQuery({
-    queryKey: ["all-users", searchValue],
+    queryKey: ["all-users", searchValue, searchRole],
     queryFn: async () =>
-      (await secureAxios.get(`/users?searchIndex=${searchValue}`)).data,
+      (
+        await secureAxios.get(
+          `/users?searchIndex=${searchValue}&role=${searchRole}`,
+        )
+      ).data,
   });
   console.log(searchValue);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const search = e.target as HTMLFormElement;
     setSearchValue(search.searchIndex.value);
+  };
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
+    setSearchRole(event.target.value);
   };
   const handleRole = (id: string, role: string, index: number) => {
     console.log(index);
@@ -78,7 +91,7 @@ const ManageUsers: React.FC = () => {
       </Helmet>
       <div className="container mx-auto px-4">
         <div className="my-20">
-          <div className="searchBox w-full lg:w-1/2 md:w-4/5 mx-auto mb-20">
+          <div className="searchBox w-full lg:w-1/2 md:w-4/5 mx-auto mt-20 mb-8">
             <form onSubmit={handleSubmit}>
               <label className="input input-bordered flex items-center gap-2">
                 <input
@@ -103,6 +116,25 @@ const ManageUsers: React.FC = () => {
                 </button>
               </label>
             </form>
+          </div>
+          <div className="role-options w-24 mx-auto mb-12">
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={searchRole}
+                  label="Age"
+                  onChange={handleRoleChange}
+                >
+                  <MenuItem value={""}>All</MenuItem>
+                  <MenuItem value={"guide"}>Guide</MenuItem>
+                  <MenuItem value={"user"}>User</MenuItem>
+                  <MenuItem value={"admin"}>Admin</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
           </div>
           <div className="overflow-x-auto">
             <table className="table table-zebra">

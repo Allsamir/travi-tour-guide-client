@@ -192,7 +192,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "manage-packages",
+        path: "manage-users",
         element: (
           <AdminRoutes>
             <ManageUsers />
