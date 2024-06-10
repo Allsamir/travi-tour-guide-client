@@ -120,6 +120,7 @@ const MyBookings: React.FC = () => {
                 <th>Price</th>
                 <th>Status</th>
                 <th>Action</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -135,25 +136,27 @@ const MyBookings: React.FC = () => {
                     <td>${bookingData.price}</td>
                     <td>{bookingData.status}</td>
                     <td>
-                      {bookingData.status === "In Review" ||
-                      bookingData.status === "Rejected" ? (
-                        <button
-                          type={`button`}
-                          className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
-                          onClick={() => handleCancle(bookingData._id)}
-                        >
-                          Cancel
-                        </button>
-                      ) : (
+                      <button
+                        type={`button`}
+                        className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
+                        onClick={() => handleCancle(bookingData._id)}
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        disabled={
+                          bookingData?.paid ||
+                          bookingData.status === "In Review" ||
+                          bookingData.status === "Rejected"
+                        }
+                        className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
+                      >
                         <Link to={`/dashboard/payment/${bookingData._id}`}>
-                          <button
-                            disabled={bookingData?.paid}
-                            className="btn btn-outline text-secondaryColor hover:border-none uppercase hover:bg-secondaryColor hover:text-primaryColor"
-                          >
-                            {bookingData.paid ? "Paid" : "Pay"}
-                          </button>
+                          {bookingData.paid ? "Paid" : "Pay"}
                         </Link>
-                      )}
+                      </button>
                     </td>
                   </tr>
                 );

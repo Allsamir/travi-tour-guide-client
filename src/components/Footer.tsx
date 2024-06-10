@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="text-center">
         <a className="text-xl">
           <img
-            src="http://quickdevs.com/demo/travi/images/logos/logo.png"
+            src="https://i.ibb.co/WPkYFQ3/Travi-logo.png"
             alt=""
             className="w-52"
           />

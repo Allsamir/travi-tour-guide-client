@@ -10,6 +10,8 @@ interface User {
   skills?: string[];
   work_experience?: string;
   rating?: number;
+  requested?: boolean;
+  changedRole: boolean;
   comments?: { name: string; comment: string; rating: number }[];
 }
 

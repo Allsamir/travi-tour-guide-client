@@ -77,7 +77,7 @@ const Slider: React.FC = () => {
                 find our passion
               </h5>
               <h2 className="leading-[70px] lg:text-6xl text-3xl uppercase text-primaryColor font-bold font-serif">
-                Escape life for <br /> A little white
+                Escape life for <br /> A little while
               </h2>
             </div>
           </div>
