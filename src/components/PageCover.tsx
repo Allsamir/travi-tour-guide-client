@@ -17,7 +17,7 @@ const PageCover: React.FC<ChildProps> = ({ imageURL, text, secondText }) => {
       <div className="w-full h-full bg-titleColor bg-opacity-45">
         <div className="content absolute bottom-8 left-4">
           <h2 className="text-primaryColor font-serif font-bold md:text-4xl text-2xl">
-            {text} in
+            {text}
           </h2>
           <p className="text-primaryColor font-serif font-bold md:text-4xl text-2xl">
             {secondText}

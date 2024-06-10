@@ -31,6 +31,7 @@ import ErrorElement from "./ErrorElement";
 import UpdateProfile from "./UserD/UpdateProfile";
 import Payment from "./UserD/Payment";
 import PaymentCompletion from "./components/PaymentCompletion";
+import BlogDetails from "./components/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails />,
       },
       {
         path: "/about-us",

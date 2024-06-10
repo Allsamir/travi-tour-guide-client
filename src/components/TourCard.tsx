@@ -77,7 +77,7 @@ const TourCard: React.FC<ChildProps> = ({
           </p>
           <p className="text-[13px]">{tourData.description?.slice(0, 147)}.</p>
           <Link to={`/tour-details/${tourData._id}`}>
-            <p className="text-[13px] font-bold mt-4">
+            <p className="text-[13px] font-bold mt-4 hover:text-secondaryColor transition-all">
               View Details <FaLongArrowAltRight className="inline" />
             </p>
           </Link>
