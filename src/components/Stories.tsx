@@ -10,7 +10,8 @@ const Stories: React.FC = () => {
   const publicAxios = usePublicAxios();
   const { data: stories } = useQuery({
     queryKey: ["stories"],
-    queryFn: async () => (await publicAxios.get(`/stories?count=4`)).data,
+    queryFn: async () =>
+      (await publicAxios.get(`/stories?page=1&limit=4`)).data.stories,
   });
   return (
     <>

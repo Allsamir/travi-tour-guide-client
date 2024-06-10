@@ -26,9 +26,9 @@ const TouristGuide: React.FC = () => {
   useEffect(() => {
     if (tabIndex === 1) {
       publicAxios
-        .get(`/packages?count=3`)
+        .get(`/packages?page=1&limit=3`)
         .then((res) => {
-          setTourdata(res.data);
+          setTourdata(res.data.packages);
           settourDataLoading(false);
         })
         .catch((err) => console.error(err));

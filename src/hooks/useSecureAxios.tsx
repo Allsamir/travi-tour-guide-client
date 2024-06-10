@@ -3,7 +3,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase.config";
 
 const secureAxios = axios.create({
-  baseURL: "https://assignment-12-server-gamma-snowy.vercel.app/api",
+  baseURL: "http://localhost:3000/api",
   withCredentials: true,
 });
 
