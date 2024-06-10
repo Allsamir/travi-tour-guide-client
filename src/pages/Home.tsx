@@ -5,18 +5,42 @@ import TouristGuide from "../components/TouristGuide";
 import { Helmet } from "react-helmet-async";
 import TourType from "../components/TourType";
 import Stories from "../components/Stories";
-
+import { animated, useSpring } from "@react-spring/web";
 const Home: React.FC = () => {
+  const springs = useSpring({
+    from: { x: 150 },
+    to: { x: 0 },
+  });
+  const springs2 = useSpring({
+    from: { x: -150 },
+    to: { x: 0 },
+  });
   return (
     <>
       <Helmet>
         <title>Travi - Tour Guide | Home</title>
       </Helmet>
-      <Slider />
-      <SectionTitle
-        heading="Travel Guide"
-        subheading="Search our website for the best destinations in the world, where you can enjoy the best vacations."
-      />
+      <animated.div
+        style={{
+          width: "100%",
+          height: "100%",
+          ...springs,
+        }}
+      >
+        <Slider />
+      </animated.div>
+      <animated.div
+        style={{
+          width: "100%",
+          height: "100%",
+          ...springs2,
+        }}
+      >
+        <SectionTitle
+          heading="Travel Guide"
+          subheading="Search our website for the best destinations in the world, where you can enjoy the best vacations."
+        />
+      </animated.div>
       <TouristGuide />
       <SectionTitle
         heading="Find Perfect Trip"

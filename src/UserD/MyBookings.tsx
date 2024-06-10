@@ -5,6 +5,8 @@ import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 interface Combine {
   _id: string;
@@ -36,6 +38,7 @@ interface Combine {
 const MyBookings: React.FC = () => {
   const secureAxios = useSecureAxios();
   const { user } = useAuth();
+  const { width, height } = useWindowSize();
   const {
     isError,
     isLoading,
@@ -101,8 +104,34 @@ const MyBookings: React.FC = () => {
       </>
     );
   }
+  if (bookings.length > 3) {
+    Swal.fire({
+      title: "Congratulation",
+      text: `You are Our lucky User`,
+      icon: "success",
+      confirmButtonText: "Close",
+      timer: 1500,
+    });
+  }
   return (
     <>
+      {bookings.length > 3 && (
+        <Confetti
+          drawShape={(ctx) => {
+            ctx.beginPath();
+            for (let i = 0; i < 22; i++) {
+              const angle = 0.35 * i;
+              const x = (0.2 + 1.5 * angle) * Math.cos(angle);
+              const y = (0.2 + 1.5 * angle) * Math.sin(angle);
+              ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.closePath();
+          }}
+          width={width}
+          height={height}
+        />
+      )}
       <Helmet>
         <title>Travi - Dashboard | My Bookings</title>
       </Helmet>
