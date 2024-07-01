@@ -23,7 +23,12 @@ const Login: React.FC = () => {
   const signInWithGoogle = () => {
     googleProvider()
       .then(() => {
-        navigate(location.state || "/");
+        Swal.fire({
+          title: "Successful",
+          text: "Login Successfully Done",
+          icon: "success",
+          confirmButtonText: "Close",
+        }).then(() => navigate(location.state || "/"));
       })
       .catch((err) => console.error(err));
   };
