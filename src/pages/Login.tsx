@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -6,6 +6,21 @@ import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import ButtonOutline2 from "../components/ButtonOutline2";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../config/firebase.config";
+const style = {
+  position: "absolute" as `absolute`,
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #fff",
+  boxShadow: 24,
+  p: 4,
+};
 type Inputs = {
   email: string;
   password: string;
@@ -20,6 +35,10 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { googleProvider, loginUser, setLoading } = useAuth();
   const location = useLocation();
+  const [open, setOpen] = React.useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const signInWithGoogle = () => {
     googleProvider()
       .then(() => {
@@ -53,6 +72,31 @@ const Login: React.FC = () => {
           confirmButtonText: "Close",
         }).then(() => setLoading(false));
       });
+  };
+  const handlePasswordReset = (event: FormEvent) => {
+    event.preventDefault();
+    if (inputRef.current) {
+      sendPasswordResetEmail(auth, inputRef.current.value)
+        .then(() => {
+          setOpen(false);
+          Swal.fire({
+            title: "Success",
+            text: "Password reset email sent successfully",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          setOpen(false);
+          Swal.fire({
+            title: "Error",
+            text: "Failed to send password reset email",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        });
+    }
   };
   return (
     <>
@@ -105,6 +149,14 @@ const Login: React.FC = () => {
                     </span>
                   )}
                 </div>
+                <label className="label -mt-5">
+                  <span
+                    onClick={handleOpen}
+                    className="label-text-alt link link-hover"
+                  >
+                    Forgot password?
+                  </span>
+                </label>
                 <ButtonOutline2
                   text="Login"
                   buttonType="submit"
@@ -135,6 +187,33 @@ const Login: React.FC = () => {
             />
           </div>
         </div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <h2 className="text-base font-semibold">Reset Your Password</h2>
+            <form onSubmit={handlePasswordReset}>
+              <div className="form-control mt-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="input input-bordered"
+                  required
+                  name="resetEmail"
+                  ref={inputRef}
+                />
+              </div>
+              <ButtonOutline2
+                text="Send Reset Link"
+                extraClass="btn-block mt-4"
+                buttonType="submit"
+              />
+            </form>
+          </Box>
+        </Modal>
       </div>
     </>
   );
