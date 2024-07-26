@@ -141,12 +141,11 @@ const TourDetails: React.FC = () => {
         heading="Meet Our Guides"
         subheading="We have a team of professionals, dedicated to providing excellent service to ensure the enjoyment of your vacation."
       />
-      <p></p>
-      <div className="carousel carousel-center rounded-box">
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">
         {guides.map((guide: User, index: number) => (
           <Link to={`/guide-profile/${guide._id}`} key={index}>
             <div
-              className="bg-base-100 shadow-xl space-y-4 py-12 carousel-item gap-8 mx-12 px-12 items-center"
+              className="bg-base-100 shadow-xl space-y-4 py-12 gap-8 mx-12 px-12"
               key={index}
             >
               <div>
@@ -156,20 +155,20 @@ const TourDetails: React.FC = () => {
                   className="w-24 rounded-full mx-auto"
                 />
               </div>
-              <div>
+              <div className="text-center">
                 <h1 className="text-xl font-serif font-bold">{guide.name}</h1>
                 <p className="text-base font-serif font-semibold">
                   {guide.role.toUpperCase()}
                 </p>
               </div>
-              <div>
+              <div className="text-center">
                 {guide.comments?.slice(0, 1).map((comment, index) => (
                   <p className="text-[13px]" key={index}>
                     {comment.comment}
                   </p>
                 ))}
               </div>
-              <div>
+              <div className="text-center">
                 <Rate disabled defaultValue={guide.rating} />
               </div>
             </div>
